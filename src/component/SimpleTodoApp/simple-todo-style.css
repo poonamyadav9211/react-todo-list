@@ -1,0 +1,64 @@
+body{
+    background-color: #fff;
+}
+
+.main-container-div{
+    background: rgb(229, 216, 216);
+    padding : 5px;
+    border: 1.5px rgb(118, 46, 46) dotted;
+    width: 40%;
+    margin: 20px 0px 20px 450px
+}
+
+.header-style{
+    text-align: center;
+    color: #807070;
+    font-size: 20px;
+    margin: 5px 0px 5px 104px;
+    padding: 5px;
+    border: 1px dotted #b0a0a0;
+    width: 390px;
+    border-radius: 2px;
+    background-color: #e3c9c9
+}
+
+#simple-todo-form{
+    padding:5px;
+    margin:5px 0px 10px 100px
+}
+
+#simple-todo-form label{
+    width: 100px;
+    display: inline-block
+}
+
+
+#simple-todo-form input{
+    width: 60%;
+    padding: 10px 10px;
+    box-sizing: border-box
+}
+
+/* #simple-todo-form input#submit{
+    background-color: #4CAF50;
+    width: 400px;
+    border: none;
+    color: white;
+    padding: 10px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px
+} */
+
+#butSubmit{
+    background-color: #4CAF50;
+    width: 400px !important;
+    border: none;
+    color: white;
+    padding: 10px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px
+}
