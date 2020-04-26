@@ -9,7 +9,8 @@ class TodoAppContainer extends Component {
         items:[],
         id:uuid(),
         item:'',
-        editItem:false
+        editItem:false,
+        selectedItem:''
     }
 
     handleChange = e =>{
@@ -18,8 +19,9 @@ class TodoAppContainer extends Component {
         });
     };
 
-    handleSubmit = (e) => {
+    handleSubmit = (e) => {        
         e.preventDefault();
+        if(!this.state.item) return;
 
         const newItem = {
             id: this.state.id,
@@ -32,7 +34,8 @@ class TodoAppContainer extends Component {
             items: updateItem,
             item: '',
             id: uuid(),
-            editItem: false
+            editItem: false,
+            selectedItem:''
         });
     };
 
@@ -53,20 +56,30 @@ class TodoAppContainer extends Component {
     }
 
     handleEdit = id => {
+        if(this.state.selectedItem.title){           
+
+            const newdata= this.state.items.filter(item => {
+                return item.id === this.state.selectedItem.id
+            });
+
+            this.state.items.push(this.state.selectedItem);
+        }
+
         const filteItem = this.state.items.filter(item => 
             item.id !== id
         );
-
-        const selectedItem = this.state.items.find(item=> item.id === id);
-
-        console.log('selectedItem: ',selectedItem)
-
+                
+        const selectedItem= this.state.items.find(item=> item.id === id);
+           
         this.setState({
             items: filteItem,
             item: selectedItem.title,
             editItem: true,
-            id: id
+            id: id,
+            selectedItem: selectedItem
         })
+
+
     }
     render() {
         return (

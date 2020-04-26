@@ -1,0 +1,77 @@
+body{
+    background-color:#c6d4df;
+}
+
+.animation-container{
+    background-color: #3f3130;
+    min-height: 500px;
+    width: 400px;
+    margin: 40px auto;
+}
+
+#todo-form input{
+    background-color: rgb(27, 112, 137);
+    border: 0;
+    width: 200px;
+    height: 50px;
+    padding: 0 20px;
+    margin: 20px;
+    font-size: 18px;
+    border-radius: 8px;
+    color: #fff;
+}
+#todo-form input::placeholder{
+    color:rgb(255, 255, 255, 0.5);
+}
+#todo-form input:focus, #todo-form button:focus{
+    outline: none;
+}
+
+#todo-form button{
+    height: 50px;
+    width: 80px;
+    border-radius: 5px;
+    border:0;
+    background-color:rgb(202, 156, 24);
+    cursor: pointer;
+    font-weight: bolder;
+    color: #fff;
+}
+
+
+
+.list{
+    background-color:#bf07ac;
+    width: 300px;
+    color: #fff;
+    height: 50px;
+    margin: 20px auto;
+    border-radius: 4px;
+}
+
+.faicon{
+    margin: 0 5px;
+    font-size: 15px;
+}
+
+.list p{
+    padding: 10px;
+    position: relative;
+}
+
+.list p span{
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+}
+
+.list p input{
+    background-color: transparent;
+    border: 0px;
+    color: #fff;
+    font-size: 18px;
+}
+
+.list p input:focus{
+   outline: none;    
+}

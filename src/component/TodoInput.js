@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 
-class TodoInput extends Component {    
+class TodoInput extends Component {  
+  
     render() {
         const { item ,handleChange, handleSubmit, editItem } = this.props
         return (
@@ -20,8 +21,12 @@ class TodoInput extends Component {
                         />  
                     </div>
                     <button type="submit" 
-                    className={editItem? 'btn btn-block btn-success mt-3' : 'btn btn-block btn-primary mt-3'} >
-                       {editItem? 'Edit Item' : 'Add Item'}</button>
+                    className={ 
+                        editItem 
+                        ? 'btn btn-block btn-success mt-3' 
+                        : 'btn btn-block btn-primary mt-3'} >
+                       {editItem? 'Edit Item' : 'Add Item'}
+                    </button>
                 </form>
             </div>
         )

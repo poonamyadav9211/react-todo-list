@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import TodoAppContainer from './component/TodoAppContainer';
+// import TodoAppContainer from './component/TodoAppContainer';
+import TodoAnimationContainer from './component/TodoAnimationApp/TodoAnimationContainer';
 
 class App extends Component {
   state = {
@@ -95,7 +96,10 @@ class App extends Component {
   render() {
     return (
       <div>
-        <TodoAppContainer />
+        <TodoAnimationContainer />
+
+
+        {/* <TodoAppContainer /> */}
 
 
         {/* <AddTodo addTodo={this.addTodo} editTodo={this.props.editTodo} />
