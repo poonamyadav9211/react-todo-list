@@ -5,6 +5,8 @@ import TodoAnimationContainer from './component/TodoAnimationApp/TodoAnimationCo
 import Home from './component/common/Home';
 import Navbar from './component/common/Navbar';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import Login from './component/common/Login';
+import Register from './component/common/Register';
 
 class App extends Component {
   render() {
@@ -16,6 +18,8 @@ class App extends Component {
             <Route path="/simpletodo" component={SimpleTodoContainer} />
             <Route path="/bootstrapodo" component={TodoAppContainer} />
             <Route path="/animationtodo" component={TodoAnimationContainer} />
+            <Route path="/login" component={Login} />
+            <Route path="/register" component={Register} />
           </Switch>
       </Router>
     )

@@ -11,6 +11,7 @@ class Navbar extends Component {
                         <li><Link to="/simpletodo">Todo simple app</Link></li>
                         <li><Link to="/bootstrapodo">Todo with bootstrap</Link></li>
                         <li><Link to="/animationtodo">Todo with Animation</Link></li>
+                        <li><Link to="/login">Login</Link></li>
                     </ul>
             </nav>
            )

@@ -57,11 +57,6 @@ class TodoAppContainer extends Component {
 
     handleEdit = id => {
         if(this.state.selectedItem.title){           
-
-            const newdata= this.state.items.filter(item => {
-                return item.id === this.state.selectedItem.id
-            });
-
             this.state.items.push(this.state.selectedItem);
         }
 
