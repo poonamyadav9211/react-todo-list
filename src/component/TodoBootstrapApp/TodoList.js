@@ -20,6 +20,7 @@ class TodoList extends Component {
                 }
 
                     <button type="button" 
+                        style={{display:items.length >0 ? 'block' : 'none'}}
                         className="btn btn-danger btn-block text-capitalize mt-5"
                         onClick={clearList}>
                         clear list

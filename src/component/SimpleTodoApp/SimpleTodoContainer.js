@@ -26,7 +26,8 @@ export default class SimpleTodoContainer extends Component {
             title:'task 3',
             completed:false
           }
-        ]
+        ],
+        inputRef: ''
       }
 
       markComplet = (id) => {
@@ -61,7 +62,8 @@ export default class SimpleTodoContainer extends Component {
           todos:delItem
         });
     
-    
+        this.state.inputRef.current.focus();
+
         // this.setState({
         //   todos: [...this.state.todos.filter(todo => 
         //     todo.id !== id
@@ -71,16 +73,22 @@ export default class SimpleTodoContainer extends Component {
       }
     
       addTodo = (todo) =>{
-    
+          let id;
+            if(this.state.todos.length>0){
+              id=parseInt(this.state.todos.slice(-1)[0].id + 1)
+            } else {
+              id = 1;
+            }
         const newTods = {
-          id: parseInt(this.state.todos.slice(-1)[0].id + 1),
+          id,
           name: todo.name,
           title: todo.title,
           completed: false
         }
         
         this.setState({
-          todos:[...this.state.todos,newTods]
+          todos:[...this.state.todos,newTods],
+          inputRef:todo.inputRef
         });
     
       }

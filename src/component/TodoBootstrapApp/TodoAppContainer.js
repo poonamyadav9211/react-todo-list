@@ -7,13 +7,19 @@ import { Redirect } from 'react-router-dom';
 import { isTokenExist } from '../BusinessLogic/common';
 
 class TodoAppContainer extends Component {
-    state={
-        items:[],
-        id:uuid(),
-        item:'',
-        editItem:false,
-        selectedItem:''
+    constructor(props){
+        super(props);
+        this.state={
+            items:[],
+            id:uuid(),
+            item:'',
+            editItem:false,
+            selectedItem:''
+        }
+
+         this.inputRef = React.createRef();
     }
+   
 
     handleChange = e =>{
         this.setState({
@@ -31,7 +37,6 @@ class TodoAppContainer extends Component {
         };
 
         const updateItem = [...this.state.items, newItem];
-
         this.setState({
             items: updateItem,
             item: '',
@@ -39,6 +44,8 @@ class TodoAppContainer extends Component {
             editItem: false,
             selectedItem:''
         });
+
+        this.inputRef.current.focus();
     };
 
     clearList = () => {
@@ -90,6 +97,7 @@ class TodoAppContainer extends Component {
                                 handleChange={this.handleChange}
                                 handleSubmit={this.handleSubmit}
                                 editItem={this.state.editItem}
+                                inputRef={this.inputRef}
                                 />
                                 <TodoList 
                                 items={this.state.items}

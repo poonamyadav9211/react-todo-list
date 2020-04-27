@@ -2,10 +2,15 @@ import React, { Component } from 'react';
 import './simple-todo-style.css';
 
 class AddTodo extends Component {
+    constructor(){
+        super()
 
+        this.inputRef = React.createRef()
+    }
     state = {
             name: '',
-            title:''            
+            title:'',
+            inputRef:''           
         }
 
     onchange= (e) => {
@@ -18,15 +23,19 @@ class AddTodo extends Component {
         e.preventDefault();
         const todo = {
             name : this.state.name,
-            title : this.state.title
+            title : this.state.title,
+            inputRef: this.inputRef
         }        
         if(this.state.name && this.state.title){
             this.props.addTodo(todo)
         }
+        
         this.setState({
             name:'',
             title:''
-        })
+        });
+
+        this.inputRef.current.focus();
    }
  
     render() {
@@ -37,6 +46,8 @@ class AddTodo extends Component {
                     <div style={{width:'500px'}}>
                       <label>Name</label>
                       <input type="text" 
+                      autoFocus
+                      ref={this.inputRef}
                       name="name" 
                       value={this.state.name}
                       onChange={this.onchange} 

@@ -5,7 +5,6 @@ export default class Logout extends Component {
     render() {
         
         if(localStorage.getItem('token') != null){
-            console.log('logout');
             localStorage.removeItem('token'); 
             window.location.reload(false)           
         }

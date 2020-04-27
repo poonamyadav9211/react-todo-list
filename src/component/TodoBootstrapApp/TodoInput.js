@@ -1,9 +1,14 @@
-import React, { Component } from 'react'
+import React, { Component, createRef } from 'react'
 
 class TodoInput extends Component {  
-  
+    constructor(props){
+        super(props);
+        
+    }
     render() {
-        const { item ,handleChange, handleSubmit, editItem } = this.props
+        
+        const { item, inputRef ,handleChange, handleSubmit, editItem } = this.props;  
+             
         return (
             <div className="card card-body my-3"> 
                 <form onSubmit={handleSubmit}>
@@ -14,9 +19,11 @@ class TodoInput extends Component {
                             </div>
                         </div>
                         <input type="text" 
+                        autofocus="true"
                         className="form-control" 
                         placeholder="add todo item"
                         value={item}
+                        ref = {inputRef}
                         onChange={handleChange}
                         />  
                     </div>
