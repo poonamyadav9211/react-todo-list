@@ -1,11 +1,20 @@
 import React, { Component } from 'react'
+import { isTokenExist } from '../BusinessLogic/common'
+import { Redirect } from 'react-router-dom'
 
-export default class Home extends Component {
+class Home extends Component {
     render() {
-        return (
-            <div>
-                Home - Todo App
-            </div>
-        )
+        if(isTokenExist()){
+                return (
+                    <div>
+                        Home - Todo App
+                    </div>
+                )
+        }
+        else{
+            return <Redirect to="/login" />
+        }
     }
 }
+
+export default Home;

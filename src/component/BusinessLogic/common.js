@@ -15,3 +15,27 @@ export const formValid = ({formErrors, ...rest}) => {
 
     return valid;
 }
+
+const lusername="poonam.yadav9211@gmail.com";
+const lpassword="poy@10";
+
+export const validateUser = (username, password) => {
+    if(username===lusername && password===lpassword){
+        const token = "poonam.yadav9211@gmail.com_poy@10";
+        return token;
+    }
+    else{
+        return null;
+    }
+}
+
+export const isTokenExist = () => {
+    const token = localStorage.getItem('token');
+    if(token == undefined || token == null ){
+        return false
+    }
+    else
+    {
+    return true; 
+    }
+}

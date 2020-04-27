@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import AddTodo from './AddTodo';
 import Todos from './Todos'
 import './simple-todo-style.css';
+import { Redirect } from 'react-router-dom';
+import { isTokenExist } from '../BusinessLogic/common';
 
 export default class SimpleTodoContainer extends Component {
     state = {
@@ -84,26 +86,29 @@ export default class SimpleTodoContainer extends Component {
       }
     
       editTodo = (id) => {
-        console.log('Id: ',id)
-        const edit = this.state.todos.filter((todo) => {
+          const edit = this.state.todos.filter((todo) => {
           return todo.id === id
         });
     
-        console.log(edit);
-        //this.props.editTodo(edit)
         return edit;
       }
 
     render() {
+      if(isTokenExist()){
         return (
-            <div>
-                <AddTodo addTodo={this.addTodo} editTodo={this.props.editTodo} />
-                <Todos todos={this.state.todos} 
-                markComplet={this.markComplet}
-                delTodo={this.delTodo}
-                editTodo={this.editTodo}
-                />
-            </div>
-        )
+          <div>
+              <AddTodo addTodo={this.addTodo} editTodo={this.props.editTodo} />
+              <Todos todos={this.state.todos} 
+              markComplet={this.markComplet}
+              delTodo={this.delTodo}
+              editTodo={this.editTodo}
+              />
+          </div>
+      )
+        }
+        else{
+            return <Redirect to="/login" />
+        }
+       
     }
 }

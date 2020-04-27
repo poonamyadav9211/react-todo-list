@@ -3,6 +3,8 @@ import TodoList from './TodoList';
 import TodoInput from './TodoInput';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import uuid from 'react-uuid';
+import { Redirect } from 'react-router-dom';
+import { isTokenExist } from '../BusinessLogic/common';
 
 class TodoAppContainer extends Component {
     state={
@@ -77,29 +79,36 @@ class TodoAppContainer extends Component {
 
     }
     render() {
-        return (
-            <div className="container">
-                <div className="row">
-                    <div className="col-10 mx-auto col-md-8 mt-4">
-                        <h3 className="text-capitalize text-center">Todo Input</h3>
-                            <TodoInput 
-                            item={this.state.item}  
-                            handleChange={this.handleChange}
-                            handleSubmit={this.handleSubmit}
-                            editItem={this.state.editItem}
-                            />
-                            <TodoList 
-                            items={this.state.items}
-                            clearList={this.clearList} 
-                            handleDelet={this.handleDelet}
-                            handleEdit={this.handleEdit}
-                            />
-                    
+        if(isTokenExist()){
+            return (
+                <div className="container">
+                    <div className="row">
+                        <div className="col-10 mx-auto col-md-8 mt-4">
+                            <h3 className="text-capitalize text-center">Todo Input</h3>
+                                <TodoInput 
+                                item={this.state.item}  
+                                handleChange={this.handleChange}
+                                handleSubmit={this.handleSubmit}
+                                editItem={this.state.editItem}
+                                />
+                                <TodoList 
+                                items={this.state.items}
+                                clearList={this.clearList} 
+                                handleDelet={this.handleDelet}
+                                handleEdit={this.handleEdit}
+                                />
+                        
+                        </div>
                     </div>
                 </div>
-            </div>
-            
-        )
+                
+            )
+            }
+            else{
+                return <Redirect to="/login" />
+            }
+
+        
     }
 }
 

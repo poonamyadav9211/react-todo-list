@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import  './todo-animation-style.css';
 import ListItem from './ListItem';
+import { Redirect } from 'react-router-dom';
+import { isTokenExist } from '../BusinessLogic/common';
 
 class TodoAnimationContainer extends Component {
     constructor(props){
@@ -54,7 +56,6 @@ class TodoAnimationContainer extends Component {
     }
 
     setUpdate(key, text){
-        console.log(key,text)
         const items = this.state.items;
         items.map(item => {
             if(item.key===key){
@@ -68,25 +69,32 @@ class TodoAnimationContainer extends Component {
     }
 
     render() {
-        return (
-            <div className="animation-container">
-                <header>
-                    <form id="todo-form" onSubmit={this.addItem}>
-                        <input 
-                        type="text" 
-                        placeholder="enter todo"
-                        value={this.state.currentItem.text}
-                        onChange={this.handleInput} />
-                        <button type="submit">Add</button> 
-                    </form>
-                </header>  
-                <ListItem 
-                items={this.state.items} 
-                deletItem={this.deletItem} 
-                setUpdate={this.setUpdate}
-                />
-            </div>
-        )
+        if(isTokenExist()){
+            return (
+                <div className="animation-container">
+                    <header>
+                        <form id="todo-form" onSubmit={this.addItem}>
+                            <input 
+                            type="text" 
+                            placeholder="enter todo"
+                            value={this.state.currentItem.text}
+                            onChange={this.handleInput} />
+                            <button type="submit">Add</button> 
+                        </form>
+                    </header>  
+                    <ListItem 
+                    items={this.state.items} 
+                    deletItem={this.deletItem} 
+                    setUpdate={this.setUpdate}
+                    />
+                </div>
+            )
+            }
+            else{
+                return <Redirect to="/login" />
+            }
+
+       
     }
 }
 

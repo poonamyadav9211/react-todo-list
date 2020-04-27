@@ -7,6 +7,7 @@ import Navbar from './component/common/Navbar';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import Login from './component/common/Login';
 import Register from './component/common/Register';
+import Logout from './component/common/Logout';
 
 class App extends Component {
   render() {
@@ -19,6 +20,7 @@ class App extends Component {
             <Route path="/bootstrapodo" component={TodoAppContainer} />
             <Route path="/animationtodo" component={TodoAnimationContainer} />
             <Route path="/login" component={Login} />
+            <Route path="/logout" component={Logout} />
             <Route path="/register" component={Register} />
           </Switch>
       </Router>

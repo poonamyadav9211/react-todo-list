@@ -1,35 +1,20 @@
 import React, { Component } from 'react';
 import './common-style.css';
 import { Link } from 'react-router-dom';
-
-const emailRegx = RegExp(/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/);
-const formValid = ({formErrors, ...rest}) => {
-    let valid = true;
-
-    //validate form error being empty
-    Object.values(formErrors).forEach(val => {
-        val.length > 0 && (valid = false)
-    });
-
-    // validate the form was filled out
-    Object.values(rest).forEach(val => {
-        val == null && (valid = false)
-    });
-
-    return valid;
-}
+import {formValid, emailRegx, validateUser, isTokenExist} from '../BusinessLogic/common';
+import {Redirect} from 'react-router-dom';
 
 class Login extends Component {
     constructor(props){
         super(props);
-
-        
+        let isLogin = false;
         this.state={
             email:null,
             password:null,
             formErrors:{
                 email:"",
-                password:""
+                password:"",
+                isLogin
             }
         }
     }
@@ -38,7 +23,15 @@ class Login extends Component {
         const {email,password} = this.state;
 
         if(formValid(this.state)){
-            console.log(' email: ',email,' password: ',password)
+            const token = validateUser(email,password);
+            if(token!==null && token.length>0){
+                this.setState({
+                    isLogin:true
+                });
+                localStorage.setItem('token',token);
+                localStorage.setItem('islogin',this.state.isLogin);
+                window.location.reload(false);
+            }
         } 
     }
 
@@ -46,7 +39,7 @@ class Login extends Component {
         e.preventDefault();
         const {name, value} = e.target;
         let formErrors = this.state.formErrors;
-    
+            
         switch(name){
             case "email":
                 formErrors.email = emailRegx.test(value)
@@ -64,50 +57,55 @@ class Login extends Component {
 
         this.setState({
             formErrors,[name]:value
-        }, () =>{console.log(this.state)})
+        })
     }
 
     render() {
         const {formErrors} = this.state;
-        return (
-            <div className="wrapper">
-                <div className="form-wrapper">
-                    <h1>Login Account</h1>   
-                    <form onSubmit={this.handleSubmit} noValidate>
-                       <div className="emailStyle">
-                            <label htmlFor="email">Email</label>
-                            <input 
-                                type="text" 
-                                className={formErrors.email.length>0 ? "error" : null} 
-                                placeholder="Enter email" 
-                                name="email" 
-                                onChange={this.handleChange}
-                                noValidate />
-                            {formErrors.email.length>0 && (
-                                <span className="errormessage">{formErrors.email}</span>
-                            )}
-                        </div>
-                        <div className="passwordStyle">
-                            <label htmlFor="password">password</label>
-                            <input 
-                                type="password" 
-                                className={formErrors.password.length>0 ? "error" : null} 
-                                placeholder="Enter password" 
-                                name="password" 
-                                onChange={this.handleChange}
-                                noValidate />
-                            {formErrors.password.length>0 && (
-                                <span className="errormessage">{formErrors.password}</span>
-                            )}
-                        </div>  
-                        <div className="createAccount">
-                            <button type="submit">Login</button> 
-                            <small><Link to="/register">If don't have an account?</Link></small>
-                        </div>  
-                    </form>
-                </div>                
-            </div>
-        )
+        
+        if(isTokenExist()){
+            return <Redirect to="/" />
+        }else{
+            return (
+                <div className="wrapper">
+                    <div className="form-wrapper">
+                        <h1>Login Account</h1>   
+                        <form onSubmit={this.handleSubmit} noValidate>
+                        <div className="emailStyle">
+                                <label htmlFor="email">Email</label>
+                                <input 
+                                    type="text" 
+                                    className={formErrors.email.length>0 ? "error" : null} 
+                                    placeholder="Enter email" 
+                                    name="email" 
+                                    onChange={this.handleChange}
+                                    noValidate />
+                                {formErrors.email.length>0 && (
+                                    <span className="errormessage">{formErrors.email}</span>
+                                )}
+                            </div>
+                            <div className="passwordStyle">
+                                <label htmlFor="password">password</label>
+                                <input 
+                                    type="password" 
+                                    className={formErrors.password.length>0 ? "error" : null} 
+                                    placeholder="Enter password" 
+                                    name="password" 
+                                    onChange={this.handleChange}
+                                    noValidate />
+                                {formErrors.password.length>0 && (
+                                    <span className="errormessage">{formErrors.password}</span>
+                                )}
+                            </div>  
+                            <div className="createAccount">
+                                <button type="submit">Login</button> 
+                                <small><Link to="/register">If don't have an account?</Link></small>
+                            </div>  
+                        </form>
+                    </div>                
+                </div>
+            )
+        }
     }
 }
 

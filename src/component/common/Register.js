@@ -1,24 +1,7 @@
 import React, { Component } from 'react';
 import './common-style.css';
-
-const emailRegx = RegExp(/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/);
-const formValid = ({formErrors, ...rest}) => {
-    let valid = true;
-
-    //validate form error being empty
-    Object.values(formErrors).forEach(val => {
-        val.length > 0 && (valid = false)
-    });
-
-    // validate the form was filled out
-    Object.values(rest).forEach(val => {
-        val == null && (valid = false)
-    });
-
-    return valid;
-}
-
-
+import {formValid, emailRegx} from '../BusinessLogic/common'
+import { Link, Redirect } from 'react-router-dom';
 
 class Register extends Component {
     constructor(props){
@@ -79,10 +62,13 @@ class Register extends Component {
 
         this.setState({
             formErrors,[name]:value
-        }, () =>{console.log(this.state)})
+        })
     }
 
     render() {
+        if(this.state.isLogin){
+            return <Redirect to="/logout" />
+        }
         const {formErrors} = this.state;
 
         return (
@@ -144,7 +130,7 @@ class Register extends Component {
                         </div>  
                         <div className="createAccount">
                             <button type="submit">Create Account</button> 
-                            <small>Already have an account?</small>
+                            <small><Link to="/login"> Already have an account?</Link></small>
                         </div>  
                     </form>
                 </div>                
