@@ -1,7 +1,11 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
+const cors = require('cors');
 
 const app =express();
+
+// allow cross-origin
+app.use(cors());
 
 app.get('/api', (req, res) => {
     res.json({
@@ -25,11 +29,11 @@ app.post('/api/posts',verifyToken, (req, res) => {
 
 
 app.post('/api/login', (req, res) => {
+    debugger
     // Mock user
     const user = {
-        id: 1,
-        username: 'poonam',
-        email: 'poonam@gmail.com'
+        email: 'poonam@gmail.com',
+        password: "poy@10"
     };
     // token expire example : 60, 30s, 10m, 10h 2d, 2 days.
     jwt.sign({user}, 'secretkey',{expiresIn: '1d'}, (err, token) => {
