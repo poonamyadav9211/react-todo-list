@@ -62,7 +62,10 @@ export default class SimpleTodoContainer extends Component {
           todos:delItem
         });
     
-        this.state.inputRef.current.focus();
+        if(this.state.inputRef){
+          this.state.inputRef.current.focus();
+        }
+        
 
         // this.setState({
         //   todos: [...this.state.todos.filter(todo => 

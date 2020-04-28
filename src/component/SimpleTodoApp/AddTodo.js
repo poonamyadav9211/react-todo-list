@@ -43,7 +43,7 @@ class AddTodo extends Component {
             <div className="main-container-div">
                 <h3 className="header-style">Add Todo</h3>
                 <form id="simple-todo-form" onSubmit={this.addTodoItem} >
-                    <div style={{width:'500px'}}>
+                    <div>
                       <label>Name</label>
                       <input type="text" 
                       autoFocus
@@ -53,7 +53,7 @@ class AddTodo extends Component {
                       onChange={this.onchange} 
                       />
                     </div><br />
-                    <div style={{width:'500px'}}>
+                    <div>
                       <label>Task</label>
                       <input 
                       type="text" 
