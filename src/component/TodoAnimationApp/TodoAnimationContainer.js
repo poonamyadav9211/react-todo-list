@@ -14,11 +14,13 @@ class TodoAnimationContainer extends Component {
                 key: ''
             }
         }
+        this.inputRef = React.createRef();
 
         this.handleInput = this.handleInput.bind(this);
         this.addItem = this.addItem.bind(this);
         this.deletItem = this.deletItem.bind(this);
         this.setUpdate = this.setUpdate.bind(this);
+        
     }
 
     handleInput(e){
@@ -43,6 +45,7 @@ class TodoAnimationContainer extends Component {
                 }
             })
         }
+        this.inputRef.current.focus();
     }
 
     deletItem(key){
@@ -76,6 +79,8 @@ class TodoAnimationContainer extends Component {
                         <form id="todo-form" onSubmit={this.addItem}>
                             <input 
                             type="text" 
+                            ref={this.inputRef}
+                            autoFocus
                             placeholder="enter todo"
                             value={this.state.currentItem.text}
                             onChange={this.handleInput} />

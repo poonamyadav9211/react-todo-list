@@ -7,18 +7,19 @@ body{
     min-height: 500px;
     width: 400px;
     margin: 40px auto;
+    padding: 20px;
 }
 
 #todo-form input{
     background-color: rgb(27, 112, 137);
     border: 0;
-    width: 200px;
+    width: 70%;
     height: 50px;
     padding: 0 20px;
-    margin: 20px;
     font-size: 18px;
     border-radius: 8px;
     color: #fff;
+    margin-right: 20px;
 }
 #todo-form input::placeholder{
     color:rgb(255, 255, 255, 0.5);
@@ -28,8 +29,7 @@ body{
 }
 
 #todo-form button{
-    height: 50px;
-    width: 80px;
+    width: 24%;
     border-radius: 5px;
     border:0;
     background-color:rgb(202, 156, 24);
@@ -41,12 +41,12 @@ body{
 
 
 .list{
-    background-color:#bf07ac;
-    width: 300px;
+    background-color: #bf07ac;
+    width: 100%;
     color: #fff;
-    height: 50px;
-    margin: 20px auto;
+    height: auto;
     border-radius: 4px;
+    margin: 15px auto;
 }
 
 .faicon{
@@ -54,15 +54,14 @@ body{
     font-size: 15px;
 }
 
-.list p{
-    padding: 10px;
+/* .list p{
     position: relative;
-}
+} */
 
 .list p span{
-    position: absolute;
-    right: 10px;
     cursor: pointer;
+    float: right;
+    padding: 10px;
 }
 
 .list p input{

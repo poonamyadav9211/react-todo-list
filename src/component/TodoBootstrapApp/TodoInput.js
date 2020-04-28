@@ -19,7 +19,7 @@ class TodoInput extends Component {
                             </div>
                         </div>
                         <input type="text" 
-                        autofocus="true"
+                        autoFocus
                         className="form-control" 
                         placeholder="add todo item"
                         value={item}
