@@ -78,25 +78,25 @@ body{
     cursor: pointer;
     float: right;
     margin-right: 10px;
-    width: 27px;
-    height: 27px;
+    width: 30px;
+    height: 30px;
     font-size: 12px;
     font-weight: bold;
 }
 
 .btn-edit-style{
-    background:rgb(97, 192, 202);
+    background: rgb(97, 192, 202);
     color: #fff;
     border: none;
+    font-weight: bold;
     border-radius: 10%;
     cursor: pointer;
     float: right;
     margin-right: 10px;
     font-size: 20px;
-    height: 27px;
-    width: 27px;
-    padding-bottom: 10px;
-
+    height: 10px;
+    width: 30px;
+    padding-bottom: 28px;
 }
 
 .lbl-style {

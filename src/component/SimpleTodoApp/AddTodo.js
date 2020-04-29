@@ -3,54 +3,50 @@ import './simple-todo-style.css';
 
 class AddTodo extends Component {
     constructor(){
-        super()
-
-        this.inputRef = React.createRef()
+        super();
+        
+        this.inputRef = React.createRef();
     }
-    state = {
-            name: '',
-            title:'',
-            inputRef:''           
-        }
-
-    onchange= (e) => {
-        this.setState({
-           [e.target.name]: e.target.value
-        });
-    }
-
+    
     addTodoItem = (e) =>{
         e.preventDefault();
         const todo = {
             name : this.state.name,
             title : this.state.title,
             inputRef: this.inputRef
-        }        
-        if(this.state.name && this.state.title){
-            this.props.addTodo(todo)
-        }
+        }    
         
-        this.setState({
-            name:'',
-            title:''
-        });
+        this.props.addTodo(todo)
+
+        // if(this.state.name && this.state.title){
+        //     this.props.addTodo(todo)
+        // }
+        
+        // this.setState({
+        //     name:'',
+        //     title:''
+        // });
 
         this.inputRef.current.focus();
+
    }
  
     render() {
+        const {name,title, handleChange, addTodo,inputRef} = this.props;
+        console.log('select: ',name,title)
+        
         return (
             <div className="main-container-div">
                 <h3 className="header-style">Add Todo</h3>
-                <form id="simple-todo-form" onSubmit={this.addTodoItem} >
+                <form id="simple-todo-form" onSubmit={addTodo} >
                     <div>
                       <label>Name</label>
                       <input type="text" 
                       autoFocus
-                      ref={this.inputRef}
+                      ref={inputRef}
                       name="name" 
-                      value={this.state.name}
-                      onChange={this.onchange} 
+                      value={name}
+                      onChange={handleChange} 
                       />
                     </div><br />
                     <div>
@@ -58,8 +54,8 @@ class AddTodo extends Component {
                       <input 
                       type="text" 
                       name="title" 
-                      value={this.state.title}
-                      onChange={this.onchange} 
+                      value={title}
+                      onChange={handleChange} 
                      />
                     </div><br />
                       <input 
