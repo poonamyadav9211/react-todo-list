@@ -33,8 +33,6 @@ class AddTodo extends Component {
  
     render() {
         const {name,title, handleChange, addTodo,inputRef} = this.props;
-        console.log('select: ',name,title)
-        
         return (
             <div className="main-container-div">
                 <h3 className="header-style">Add Todo</h3>

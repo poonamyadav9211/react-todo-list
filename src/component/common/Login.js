@@ -3,7 +3,7 @@ import './common-style.css';
 import { Link } from 'react-router-dom';
 import {formValid, emailRegx, validateUser, isTokenExist} from '../BusinessLogic/common';
 import {Redirect} from 'react-router-dom';
-
+import { getTokenByUser } from "../TestApis/ApiTest";
 class Login extends Component {
     constructor(props){
         super(props);
@@ -24,13 +24,16 @@ class Login extends Component {
 
         if(formValid(this.state)){
             const token = validateUser(email,password);
+            const data = getTokenByUser(email,password);
+            
+            console.log("data: ",data);
             if(token!==null && token.length>0){
                 this.setState({
                     isLogin:true
                 });
-                localStorage.setItem('token',token);
+                //localStorage.setItem('token',token);                
                 localStorage.setItem('islogin',this.state.isLogin);
-                window.location.reload(false);
+                // window.location.reload(false);
             }
         } 
     }
