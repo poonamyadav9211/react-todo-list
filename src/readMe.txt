@@ -12,6 +12,7 @@ run application :
 npm start
 
 // added new branch
-// new todo_with_localstate branch
+// new banch "todo_with_localstate"
+// new branch "todo_with_redux"
 
 
