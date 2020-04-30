@@ -14,29 +14,27 @@ class Login extends Component {
             formErrors:{
                 email:"",
                 password:"",
-                isLogin
+                isLogin:false
             }
         }
     }
+
     handleSubmit = e => {
         e.preventDefault();
         const {email,password} = this.state;
 
         if(formValid(this.state)){
-            const token = validateUser(email,password);
-            const data = getTokenByUser(email,password);
-            
-            console.log("data: ",data);
-            if(token!==null && token.length>0){
+            const login= getTokenByUser(email,password);
+            const token = login.then(res => {
                 this.setState({
                     isLogin:true
-                });
-                //localStorage.setItem('token',token);                
-                localStorage.setItem('islogin',this.state.isLogin);
-                // window.location.reload(false);
+                })
+                localStorage.setItem('token', res.token);
+                window.location.reload(false);
+            });
+                
             }
-        } 
-    }
+    } 
 
     handleChange = e => {
         e.preventDefault();
@@ -57,7 +55,7 @@ class Login extends Component {
             default:
                 break;
         }
-
+    
         this.setState({
             formErrors,[name]:value
         })
@@ -65,10 +63,12 @@ class Login extends Component {
 
     render() {
         const {formErrors} = this.state;
-        
         if(isTokenExist()){
             return <Redirect to="/" />
-        }else{
+        }
+        if(this.state.isLogin){
+            return <Redirect to="/" />
+        } else {
             return (
                 <div className="wrapper">
                     <div className="form-wrapper">
@@ -82,6 +82,7 @@ class Login extends Component {
                                     placeholder="Enter email" 
                                     name="email" 
                                     onChange={this.handleChange}
+                                    autoFocus
                                     noValidate />
                                 {formErrors.email.length>0 && (
                                     <span className="errormessage">{formErrors.email}</span>

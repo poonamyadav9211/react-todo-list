@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import './common-style.css';
-import {formValid, emailRegx} from '../BusinessLogic/common'
+import {formValid, emailRegx, isTokenExist} from '../BusinessLogic/common'
 import { Link, Redirect } from 'react-router-dom';
+import {newPostUser} from '../TestApis/ApiTest';
 
 class Register extends Component {
     constructor(props){
@@ -17,16 +18,26 @@ class Register extends Component {
                 lastName:"",
                 email:"",
                 password:""
-            }
+            },
+            userCreated:false
         }
     }
 
     handleSubmit = e => {
         e.preventDefault();
         const {firstName,lastName,email,password} = this.state;
+        const user={
+            firstName,
+            lastName,
+            email,
+            password
+        };
 
         if(formValid(this.state)){
-            console.log('firstName: ',firstName,' lastname: ',lastName,' email: ',email,' password: ',password)
+            newPostUser(user);
+           this.setState({
+               userCreated:true
+           })
         } 
     }
 
@@ -66,9 +77,13 @@ class Register extends Component {
     }
 
     render() {
-        if(this.state.isLogin){
-            return <Redirect to="/logout" />
+        if(this.state.userCreated){
+            return <Redirect to="/login" />
         }
+        if(isTokenExist()){
+            return <Redirect to="/" />
+        }
+
         const {formErrors} = this.state;
 
         return (
@@ -84,6 +99,7 @@ class Register extends Component {
                                 placeholder="Enter firstname" 
                                 name="firstName" 
                                 onChange={this.handleChange}
+                                autoFocus
                                 noValidate />
                             {formErrors.firstName.length>0 && (
                                 <span className="errormessage">{formErrors.firstName}</span>

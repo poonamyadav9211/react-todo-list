@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 
+
 class ApiTest extends Component {
     constructor(){
         super();
@@ -23,12 +24,6 @@ class ApiTest extends Component {
     }
 
     getToken = (email, password) =>{
-    console.log("Loin credencials: ",email,password)
-        // const user = {
-        //     email:"poonam.yadav9211@gmail.com",
-        //     password:"poy@10"
-        // };
-
         let loginToken = fetch('http://localhost:5000/api/login/',{
             method:"POST",
             body:JSON.stringify({user:{email:"poonam@gmail.com", password:"poonam@10"}})
@@ -41,7 +36,6 @@ class ApiTest extends Component {
             });
             return data;
         });
-        console.log('--------loginToken---: ',loginToken);
         return loginToken
     }
 
@@ -63,9 +57,6 @@ class ApiTest extends Component {
     }
 
     postUser = (user) =>{
-        console.log('user: ',user)
-        const email="email@gmail.com";
-        const password="pass@123";
         fetch('http://localhost:5000/api/post_user/',{
             method: "POST",
             body:JSON.stringify({user}),
@@ -75,12 +66,8 @@ class ApiTest extends Component {
         })
         .then(res => res.json())
         .then(data=> {
-            // this.setState({
-            //     apiCall : data.message
-            // })
-
-            console.log('data: ',data)
-        })
+            return data;
+        });
     }
 
 
@@ -104,16 +91,31 @@ class ApiTest extends Component {
 }
 
 export const getTokenByUser = (email, password) => { 
-    var myemail='';
-        fetch('http://localhost:5000/api/login/',{
+       const getToken= fetch('http://localhost:5000/api/login/',{
             method:"POST",
             body:JSON.stringify({user:{email, password}})
         })
         .then(res => res.json())
         .then(data=> {
-            console.log(data.token)
             localStorage.setItem('token',data.token);
-            localStorage.setItem('user1',data.user);                
+            localStorage.setItem('isLogin',true);  
+            return data;              
+        });
+        return getToken; 
+    }
+
+
+    export const newPostUser = (user) =>{
+        fetch('http://localhost:5000/api/post_user/',{
+            method: "POST",
+            body:JSON.stringify({user}),
+            headers:{
+                "Authrization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJ1c2VybmFtZSI6InBvb25hbSIsImVtYWlsIjoicG9vbmFtQGdtYWlsLmNvbSJ9LCJpYXQiOjE1ODgwNjg0MDl9._RUJhJZE-5q3iJoCSNZ-90nULD__5kPdk44JK6LXLFw"
+            }
+        })
+        .then(res => res.json())
+        .then(data=> {
+            return data;
         });
     }
 

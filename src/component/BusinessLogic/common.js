@@ -21,7 +21,7 @@ const lpassword="poy@10";
 
 export const validateUser = (username, password) => {
     if(username===lusername && password===lpassword){
-        const token = "poonam.yadav9211@gmail.com_poy@10";
+        const token = localStorage.getItem('token');
         return token;
     }
     else{
@@ -29,7 +29,7 @@ export const validateUser = (username, password) => {
     }
 }
 
-export const isTokenExist = () => {
+export const isTokenExist = () => {    
     const token = localStorage.getItem('token');
     if(token == undefined || token == null ){
         return false

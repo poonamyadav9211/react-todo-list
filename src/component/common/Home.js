@@ -36,8 +36,6 @@ class Home extends Component {
       }
 
     render() {
-        console.log('message: ', this.state.mydata);
-        console.log('token: ', this.state.token);
         if(isTokenExist()){
                 return (
                     <div>
