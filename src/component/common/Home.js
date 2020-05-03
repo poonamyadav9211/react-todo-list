@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { isTokenExist } from '../BusinessLogic/common'
 import { Redirect } from 'react-router-dom'
 import ApiTest from '../TestApis/ApiTest'
+import { connect } from 'react-redux';
 
 
 const getApi=new ApiTest().getApi;
@@ -36,6 +37,8 @@ class Home extends Component {
       }
 
     render() {
+        console.log('tokenState: ',this.props.token);
+        console.log('home user state: ',this.props.user)
         if(isTokenExist()){
                 return (
                     <div>
@@ -55,4 +58,9 @@ class Home extends Component {
     }
 }
 
-export default Home;
+const mapStateToProps = state =>({
+    token : state,
+    user: state.userState
+});
+
+export default connect(mapStateToProps)(Home)

@@ -1,0 +1,13 @@
+export const INCREMENT = "INCREMENT";
+export const DECREMENT = "DECREMENT";
+export const ISLOGIN = "ISLOGIN";
+export const AUTHTOKEN = "AUTHTOKEN";
+export const FIRSTNAME = "FIRSTNAME";
+export const LASTNAME = "LASTNAME";
+export const EMAIL = "EMAIL";
+export const PASSWORD = "PASSWORD";
+export const FIRSTNAMEERROR = "FIRSTNAMEERROR";
+export const LASTNAMEERROR = "LASTNAMEERROR";
+export const EMAILERROR = "EMAILERROR";
+export const PASSWORDERROR = "PASSWORDERROR";
+export const ISUSERCREATED = "ISUSERCREATED";

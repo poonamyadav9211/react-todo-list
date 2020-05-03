@@ -32,7 +32,7 @@ class Register extends Component {
             email,
             password
         };
-
+console.log("state: ",this.state)
         if(formValid(this.state)){
             newPostUser(user);
            this.setState({
@@ -77,12 +77,12 @@ class Register extends Component {
     }
 
     render() {
-        if(this.state.userCreated){
-            return <Redirect to="/login" />
-        }
-        if(isTokenExist()){
-            return <Redirect to="/" />
-        }
+        // if(this.state.userCreated){
+        //     return <Redirect to="/login" />
+        // }
+        // if(isTokenExist()){
+        //     return <Redirect to="/" />
+        // }
 
         const {formErrors} = this.state;
 

@@ -8,6 +8,10 @@ import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import Login from './component/common/Login';
 import Register from './component/common/Register';
 import Logout from './component/common/Logout';
+import SimpleMath from './ReduxExample/Component/SimpleMath';
+import Test from './ReduxExample/Component/Test';
+import ReduxRegister from './ReduxExample/ReduxRegister';
+import ReduxLogin from './ReduxExample/ReduxLogin';
 
 class App extends Component {
   render() {
@@ -22,6 +26,10 @@ class App extends Component {
             <Route path="/login" component={Login} />
             <Route path="/logout" component={Logout} />
             <Route path="/register" component={Register} />
+            <Route path="/counter" component={SimpleMath} />
+            <Route path="/test" component={Test} />
+            <Route path="/reduxregister" component={ReduxRegister} />
+            <Route path="/reduxlogin" component={ReduxLogin} />
           </Switch>
       </Router>
     )

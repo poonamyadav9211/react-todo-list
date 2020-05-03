@@ -14,6 +14,7 @@ class TodoAnimationContainer extends Component {
                 key: ''
             }
         }
+        
         this.inputRef = React.createRef();
 
         this.handleInput = this.handleInput.bind(this);

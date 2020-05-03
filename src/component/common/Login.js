@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import './common-style.css';
 import { Link } from 'react-router-dom';
-import {formValid, emailRegx, validateUser, isTokenExist} from '../BusinessLogic/common';
+import {formValid, emailRegx, isTokenExist} from '../BusinessLogic/common';
 import {Redirect} from 'react-router-dom';
 import { getTokenByUser } from "../TestApis/ApiTest";
 class Login extends Component {
     constructor(props){
         super(props);
-        let isLogin = false;
         this.state={
             email:null,
             password:null,
