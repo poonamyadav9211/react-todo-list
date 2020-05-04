@@ -3,7 +3,6 @@ const state = store.getState();
 export const emailRegx = RegExp(/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/);
 export const formValid = ({formErrors, ...rest}) => {
     let valid = true;
-    console.log("common: ",formErrors)
     //validate form error being empty
     Object.values(formErrors).forEach(val => {
         val.length > 0 && (valid = false)
@@ -30,8 +29,7 @@ export const validateUser = (username, password) => {
     }
 }
 
-export const isTokenExist = () => {    
-    console.log('get state', state)
+export const isTokenExist = () => {   
     const token = localStorage.getItem('token');
     if(token == undefined || token == null ){
         return false

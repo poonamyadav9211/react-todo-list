@@ -93,7 +93,6 @@ class ReduxRegister extends Component {
         return (
             <div className="wrapper">
                 <div className="form-wrapper">
-                <button onClick={this.onIncreament} >Is Login</button>
                     <h1>Create Account</h1>   
                     <form onSubmit={this.handleSubmit} noValidate>
                         <div className="firstnameStyle">

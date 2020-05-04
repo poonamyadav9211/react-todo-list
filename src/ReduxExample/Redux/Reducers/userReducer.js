@@ -16,7 +16,6 @@ const initialState = {
 }
 
 const users = (state= initialState, action) => {  
-    console.log('call user===========')
     switch (action.type) {
         case FIRSTNAME:
             return {

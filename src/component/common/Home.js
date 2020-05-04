@@ -37,8 +37,6 @@ class Home extends Component {
       }
 
     render() {
-        console.log('tokenState: ',this.props.token);
-        console.log('home user state: ',this.props.user)
         if(isTokenExist()){
                 return (
                     <div>

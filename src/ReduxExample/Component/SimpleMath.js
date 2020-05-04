@@ -17,7 +17,6 @@ class SimpleMath extends Component {
     }
 
     render() {
-        console.log(this.props.state.counter)
         return (
             <div style={{margin:'50px 0px 0px 400px'}}>
                 <div style={{border:'1px solid black', width:'50%', margin:'50px'}}>

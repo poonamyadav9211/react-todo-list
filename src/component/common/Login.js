@@ -29,7 +29,7 @@ class Login extends Component {
                     isLogin:true
                 })
                 localStorage.setItem('token', res.token);
-                window.location.reload(false);
+                //window.location.reload(false);
             });
                 
             }

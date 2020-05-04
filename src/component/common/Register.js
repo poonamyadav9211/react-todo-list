@@ -32,7 +32,6 @@ class Register extends Component {
             email,
             password
         };
-console.log("state: ",this.state)
         if(formValid(this.state)){
             newPostUser(user);
            this.setState({

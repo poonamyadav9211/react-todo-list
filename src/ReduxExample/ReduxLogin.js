@@ -28,10 +28,9 @@ class ReduxLogin extends Component {
             const login= getTokenByUser(email,password);
             const token = login.then(res => {
                 this.props.isloginAction(true);
-                console.log(res.token)
                 // localStorage.setItem('token', res.token);
                 this.props.tokenAction(res.token);
-                window.location.reload(false);
+                //window.location.reload(false);
             });  
         }
     } 
@@ -63,14 +62,14 @@ class ReduxLogin extends Component {
     }
 
     render() {
-        const { email, password} = this.props.userError
+        const { email, password} = this.props.userError;
 
-        // if(isTokenExist()){
-        //     return <Redirect to="/" />
-        // }
-        // if(this.props.islogin){
-        //     return <Redirect to="/" />
-        // } else {
+        if(isTokenExist()){
+            return <Redirect to="/" />
+        }
+        if(this.props.islogin==true){
+            return <Redirect to="/" />
+        } else {
             return (
                 <div className="wrapper">
                     <div className="form-wrapper">
@@ -113,7 +112,7 @@ class ReduxLogin extends Component {
             )
         }
     }
-//}
+}
 
 const mapStateToProps = state =>({
     islogin : state.AuthState.isLogin,
