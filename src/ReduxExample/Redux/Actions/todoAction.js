@@ -7,7 +7,8 @@ import {
     ADDTODOTITLE,
     ADDTODOTEXT,
     MARKCOMPLETED,
-    ISBUTTONEDIT
+    ISBUTTONEDIT,
+    CLEARTODO
 } from '../Actions/type';
 
 export const getTodoAction = (id)  => (
@@ -70,5 +71,11 @@ export const isButtonEditAction = (isButtonEdit)  => (
     {
         type: ISBUTTONEDIT,
         payload: isButtonEdit
+    }
+);
+
+export const clearTodoAction = ()  => (
+    {
+        type: CLEARTODO
     }
 );

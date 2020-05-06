@@ -5,18 +5,22 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import uuid from 'react-uuid';
 import { Redirect } from 'react-router-dom';
 import { isTokenExist } from '../BusinessLogic/common';
-
+import {
+    addTodoAction,
+    deleteTodoAction,
+    clearTodoAction,
+    isButtonEditAction,
+    editTodoAction
+  } from '../../ReduxExample/Redux/Actions/todoAction'
+import { connect } from 'react-redux';
+  
 class TodoAppContainer extends Component {
     constructor(props){
         super(props);
         this.state={
-            items:[],
             id:uuid(),
-            item:'',
-            editItem:false,
-            selectedItem:''
+            item:''
         }
-
          this.inputRef = React.createRef();
     }
    
@@ -27,64 +31,46 @@ class TodoAppContainer extends Component {
         });
     };
 
-    handleSubmit = (e) => {        
+    handleSubmit = (e) => { 
         e.preventDefault();
         if(!this.state.item) return;
 
         const newItem = {
-            id: this.state.id,
+            id: this.props.isButtonEdit? this.state.id: uuid(),
             title: this.state.item
         };
 
-        const updateItem = [...this.state.items, newItem];
+        if(this.props.isButtonEdit){
+            this.props.editTodoAction(newItem);
+            this.props.isButtonEditAction(false);
+        } else {
+            this.props.addTodoAction(newItem)
+        }        
+
         this.setState({
-            items: updateItem,
-            item: '',
-            id: uuid(),
-            editItem: false,
-            selectedItem:''
+            item: ''
         });
 
         this.inputRef.current.focus();
     };
 
     clearList = () => {
-        this.setState({
-            items: []
-        });
+        this.props.clearTodoAction();
     };
 
     handleDelet = id => {
-        const filteItem = this.state.items.filter(item => 
-            item.id !== id
-        );
-
-        this.setState({
-            items: filteItem
-        })
+        this.props.deleteTodoAction(id);
     }
 
     handleEdit = id => {
-        if(this.state.selectedItem.title){           
-            this.state.items.push(this.state.selectedItem);
-        }
-
-        const filteItem = this.state.items.filter(item => 
-            item.id !== id
-        );
-                
-        const selectedItem= this.state.items.find(item=> item.id === id);
-           
+        const todo = this.props.todos.find(item => item.id === id);
         this.setState({
-            items: filteItem,
-            item: selectedItem.title,
-            editItem: true,
-            id: id,
-            selectedItem: selectedItem
-        })
-
-
+            item:todo.title,
+            id
+        });
+        this.props.isButtonEditAction(true);       
     }
+
     render() {
         if(isTokenExist()){
             return (
@@ -96,11 +82,11 @@ class TodoAppContainer extends Component {
                                 item={this.state.item}  
                                 handleChange={this.handleChange}
                                 handleSubmit={this.handleSubmit}
-                                editItem={this.state.editItem}
+                                editItem={this.props.isButtonEdit}
                                 inputRef={this.inputRef}
                                 />
                                 <TodoList 
-                                items={this.state.items}
+                                items={this.props.todos}
                                 clearList={this.clearList} 
                                 handleDelet={this.handleDelet}
                                 handleEdit={this.handleEdit}
@@ -120,4 +106,36 @@ class TodoAppContainer extends Component {
     }
 }
 
-export default TodoAppContainer;
+const mapStateToProps = state =>({
+    todosOpration: state.todoState.todosOpration,
+    todos: state.todoState.todosOpration.todos,
+    todoItem: state.todoState.addTodoItems,
+    isButtonEdit: state.todoState.isButtonEdit
+  });
+  
+  const mapDispatchToProps = (dispatch) => {
+    return {
+     
+      addTodoAction: todo => {
+        dispatch(addTodoAction(todo))
+      },
+      deleteTodoAction: id => {
+        dispatch(deleteTodoAction(id))
+      },
+      clearTodoAction: () => {
+        dispatch(clearTodoAction())
+      },
+    //   getTodoAction: id => {
+    //     dispatch(getTodoAction(id))
+    //   },
+      editTodoAction: (todo) => {
+        dispatch(editTodoAction(todo))
+      },
+      isButtonEditAction: (isButtonEdit) => {
+        dispatch(isButtonEditAction(isButtonEdit))
+      }
+    }
+  };
+  
+export default connect(mapStateToProps, mapDispatchToProps)(TodoAppContainer)
+  

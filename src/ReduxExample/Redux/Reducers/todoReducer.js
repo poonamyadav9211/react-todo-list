@@ -7,7 +7,8 @@ import {
     ADDTODOTITLE,
     ADDTODOTEXT,
     MARKCOMPLETED,
-    ISBUTTONEDIT
+    ISBUTTONEDIT,
+    CLEARTODO
 } from '../Actions/type';
 
 import { combineReducers } from 'redux';
@@ -20,7 +21,6 @@ const initialState = {
 }
 
 const todosOpration = (state= initialState, action) => {
-    console.log('todo reducer action: ',action)
     switch(action.type){
         case GETTODO: 
             return {
@@ -48,7 +48,6 @@ const todosOpration = (state= initialState, action) => {
             return{
                 todos: state.todos.map(todo => 
                     {
-                        console.log('todo.name = action.payload.name: ',todo.id, action.payload.id)
                         if(todo.id === action.payload.id)
                         {
                             todo.name = action.payload.name;
@@ -67,6 +66,10 @@ const todosOpration = (state= initialState, action) => {
                 todos: state.todos.map(todo => {if(todo.id === action.payload){
                     todo.completed =! todo.completed
                 }return todo})
+            }
+        case CLEARTODO:
+            return{
+                todos: []
             }
         default:
             return state;
