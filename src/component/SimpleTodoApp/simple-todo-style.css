@@ -57,9 +57,9 @@ body{
     font-size: 16px
 } */
 
-#butSubmit{
+#simple-todo-form button{
     background-color: #4CAF50;
-    width: 375px !important;
+    width: 385px !important;
     border: none;
     color: white;
     padding: 10px 10px;

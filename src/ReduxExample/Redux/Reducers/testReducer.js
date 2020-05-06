@@ -5,7 +5,6 @@ const initialState = {
 }
 
 export const testOpration = (state= initialState, action) => {
-    console.log( "actions : ",action)
      switch(action.type){
         case 'ADD_TEXT': 
             return {

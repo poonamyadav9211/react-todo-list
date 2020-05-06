@@ -20,6 +20,7 @@ const initialState = {
 }
 
 const todosOpration = (state= initialState, action) => {
+    console.log('todo reducer action: ',action)
     switch(action.type){
         case GETTODO: 
             return {
@@ -47,9 +48,11 @@ const todosOpration = (state= initialState, action) => {
             return{
                 todos: state.todos.map(todo => 
                     {
+                        console.log('todo.name = action.payload.name: ',todo.id, action.payload.id)
                         if(todo.id === action.payload.id)
                         {
-                            todo.name = action.payload.name
+                            todo.name = action.payload.name;
+                            todo.title = action.payload.title;
                         } 
                         return todo
                     })
@@ -88,11 +91,10 @@ const addTodoItems = (state= initialState, action) => {
 }
 
 const isButtonEdit = (state= false, action) => {  
-    switch(action.type){ 
-        case ISBUTTONEDIT:
-            return action.payload
-        default:
-            return state;
+    if(action.type==ISBUTTONEDIT){
+        return action.payload
+    }  else {
+        return state
     }
 }
 

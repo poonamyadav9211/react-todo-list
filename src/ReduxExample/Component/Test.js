@@ -52,7 +52,6 @@ class Test extends Component {
             name:'poonam yadav'
         }
         this.props.EditText(id, item)
-        console.log(this.props.state.items)
          
     }
 
@@ -60,7 +59,6 @@ class Test extends Component {
         return (
             <div>
                 <h1>Test Application!!</h1>
-                {console.log('item: ',this.props.state)}
                 <input type="text" ref={this.inputRef} name="text" value={this.state.text} onChange={this.handleChange} />
                 <button type="submit" onClick={this.handleSubmit} >Save</button>
                     <ul>

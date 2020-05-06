@@ -70,7 +70,6 @@ app.post('/api/login', (req, res) => {
 });
 
 function validateUser(user) {
-    // console.log('users: ',users)
     return users.find(u => u.email===user.email && u.password === user.password);
 }
 

@@ -10,21 +10,10 @@ class AddTodo extends Component {
  
     render() {
         const {title,name,handleChange, addTodo,inputRef} = this.props;
-        console.log(this.props.isButtonEdit)
         return (
             <div className="main-container-div">
                 <h3 className="header-style">Add Todo</h3>
                 <form id="simple-todo-form">
-                    <div>
-                      <label>Name</label>
-                      <input type="text" 
-                      autoFocus
-                      ref={inputRef}
-                      name="name" 
-                      value={name}
-                      onChange={handleChange} 
-                      />
-                    </div><br />
                     <div>
                       <label>Task</label>
                       <input 
@@ -34,19 +23,32 @@ class AddTodo extends Component {
                       onChange={handleChange} 
                      />
                     </div><br />
-                    <input 
-                       id="butSubmit"
+                    <div>
+                      <label>Create By</label>
+                      <input type="text" 
+                      autoFocus
+                      ref={inputRef}
+                      name="name" 
+                      value={name}
+                      onChange={handleChange} 
+                      />
+                    </div><br />            
+                    <button 
+                       id="butSave"
                         type="button" 
-                        value="Submit" 
-                        name="submit"
+                        name="save"
                         onClick={addTodo}
-                        className={this.props.isButtonEdit? "display-none" : "display-block" } /> 
-                    <input 
-                       id="butSubmit"
+                        className={this.props.isButtonEdit? 
+                        "display-none" : 
+                        "display-block" } >Save</button>
+                    <button 
+                       id="butUpdate"
                         type="button" 
-                        value="Update" 
-                        name="submit"
-                        className={this.props.isButtonEdit? "display-block" : "display-none"} />                  
+                        name="update"
+                        onClick={addTodo}
+                        className={this.props.isButtonEdit? 
+                        "display-block" : 
+                        "display-none"} >Update</button>                 
                 </form>
             </div>
         )
@@ -55,8 +57,6 @@ class AddTodo extends Component {
 
 
 const mapStateToProps = state =>({
-    todosOpration: state.todoState.todosOpration,
-    todoItem: state.todoState.addTodoItems,
     isButtonEdit: state.todoState.isButtonEdit
   });
   

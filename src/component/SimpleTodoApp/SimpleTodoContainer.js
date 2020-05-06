@@ -21,28 +21,7 @@ class SimpleTodoContainer extends Component {
     super();
 
     this.state = {
-      todos:[
-        {
-          id:1,
-          name:'poonam',
-          title:'task 1',
-          completed:false
-        },
-        {
-          id:2,
-          name:'amit',
-          title:'task 2',
-          completed:true
-        },
-        {
-          id:3,
-          name:'roshani',
-          title:'task 3',
-          completed:false
-        }
-      ],
-      todo:'',
-      isEdit : false
+      updateId:0
     }
 
     this.inputRef = React.createRef();
@@ -76,30 +55,22 @@ class SimpleTodoContainer extends Component {
             return;
           }
           const newTods = {
-            id,
+            id: this.props.isButtonEdit? this.state.updateId : id,
             name: text,
             title,
             completed: false
           }
-          if(this.state.isEdit){
-            this.props.editTodoAction(newTods)
+
+          if(this.props.isButtonEdit){
+            this.props.editTodoAction(newTods);
+            this.props.isButtonEditAction(false);
           } else{
             this.props.addTodoAction(newTods); 
           }
           
-
-          this.setState({
-            todos:[...this.state.todos,newTods],
-            todo:'',
-            name:'',
-            title:''
-          });
-        
-          this.props.addTodoTextAction('');
-          this.props.addTodoTitleAction('');
+        this.props.addTodoTextAction('');
+        this.props.addTodoTitleAction('');
         this.inputRef.current.focus();
-
-
       }
     
       editTodo = (id) => {
@@ -114,20 +85,9 @@ class SimpleTodoContainer extends Component {
           });
 
         this.props.isButtonEditAction(true);  
-        
-        //this.props.editTodoAction(selectedTodo)
-        // const updated = this.state.todos.filter((todo) => {
-        //   return todo.id !== id
-        // });
-
-        // this.setState({
-        //   name: selectedTodo.name,
-        //   title:selectedTodo.title,
-        //   todos:updated
-        // });
-
         this.setState({
-          isEdit:true
+          isEdit:true,
+          updateId: selectedTodo.id
         })
       }
 
@@ -148,23 +108,12 @@ class SimpleTodoContainer extends Component {
         // })
       }
 
-      getTodo =() =>{
-        const gettodo = this.props.getTodoAction(1)
-        
-        // const getBystate = this.props.todosOpration.todos.find(todo => todo.id===2);
-        // console.log('getBystate: ',getBystate)
-        
-        
-      }
-
     render() {
       this.props.todoItem.item=this.props.todo      
-      console.log('get todo: ',this.props.todosOpration.todos);
       const { text, title} = this.props.todoItem;
       if(isTokenExist()){
         return (
           <div>
-            <button type="button" onClick={this.getTodo} >Get Todo</button>
               <AddTodo 
                 addTodo={this.addTodo} 
                 editTodo={this.props.editTodo} 
@@ -196,6 +145,7 @@ const mapStateToProps = state =>({
   todosOpration: state.todoState.todosOpration,
   todo: state.todoState.todosOpration.todo,
   todoItem: state.todoState.addTodoItems,
+  isButtonEdit: state.todoState.isButtonEdit
 });
 
 const mapDispatchToProps = (dispatch) => {

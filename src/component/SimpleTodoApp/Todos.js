@@ -19,9 +19,8 @@ Todos.propTypes = {
     todos: PropTypes.array.isRequired
 }
 
-
 const mapStateToProps = state =>({
     todos: state.todoState.todosOpration.todos
-  });
+});
 
 export default connect(mapStateToProps)(Todos)
