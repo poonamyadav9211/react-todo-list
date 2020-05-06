@@ -18,6 +18,7 @@ class AddTodo extends Component {
                       <label>Task</label>
                       <input 
                       type="text" 
+                      autoFocus
                       name="title" 
                       value={title}
                       onChange={handleChange} 
@@ -25,8 +26,7 @@ class AddTodo extends Component {
                     </div><br />
                     <div>
                       <label>Create By</label>
-                      <input type="text" 
-                      autoFocus
+                      <input type="text"                      
                       ref={inputRef}
                       name="name" 
                       value={name}

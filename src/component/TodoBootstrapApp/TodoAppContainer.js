@@ -19,7 +19,8 @@ class TodoAppContainer extends Component {
         super(props);
         this.state={
             id:uuid(),
-            item:''
+            item:'',
+            todos:[]
         }
          this.inputRef = React.createRef();
     }
@@ -43,12 +44,14 @@ class TodoAppContainer extends Component {
         if(this.props.isButtonEdit){
             this.props.editTodoAction(newItem);
             this.props.isButtonEditAction(false);
+            this.state.todos=[...this.props.todos];
         } else {
             this.props.addTodoAction(newItem)
+            this.state.todos.push(newItem)
         }        
-
+        
         this.setState({
-            item: ''
+            item: ''            
         });
 
         this.inputRef.current.focus();
@@ -59,15 +62,20 @@ class TodoAppContainer extends Component {
     };
 
     handleDelet = id => {
-        this.props.deleteTodoAction(id);
+        this.state.todos=[...this.props.todos.filter(item=>item.id !==id)];
+        this.props.deleteTodoAction(id) ;
+        
     }
 
     handleEdit = id => {
         const todo = this.props.todos.find(item => item.id === id);
+        this.state.todos = this.props.todos.filter(item => item.id!=id);
+
         this.setState({
             item:todo.title,
             id
-        });
+        })
+
         this.props.isButtonEditAction(true);       
     }
 
@@ -86,7 +94,7 @@ class TodoAppContainer extends Component {
                                 inputRef={this.inputRef}
                                 />
                                 <TodoList 
-                                items={this.props.todos}
+                                items={this.state.todos}
                                 clearList={this.clearList} 
                                 handleDelet={this.handleDelet}
                                 handleEdit={this.handleEdit}

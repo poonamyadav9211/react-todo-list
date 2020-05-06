@@ -128,7 +128,11 @@ body{
 .display-block{
     display: block !important;
 }
+
 /* add style for bootstrap todo app */
 
+.cursor-pointer{
+    cursor: pointer;
+}
 
 /* add style for animation todo app */
