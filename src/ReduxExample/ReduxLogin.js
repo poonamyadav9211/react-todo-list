@@ -28,7 +28,7 @@ class ReduxLogin extends Component {
             const login= getTokenByUser(email,password);
             const token = login.then(res => {
                 this.props.isloginAction(true);
-                // localStorage.setItem('token', res.token);
+                localStorage.setItem('token', res.token);
                 this.props.tokenAction(res.token);
                 //window.location.reload(false);
             });  

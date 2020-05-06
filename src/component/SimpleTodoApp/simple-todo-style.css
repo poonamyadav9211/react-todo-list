@@ -121,7 +121,13 @@ body{
     margin: 0 6px;
 }
 
+.display-none{
+    display: none !important;
+}
 
+.display-block{
+    display: block !important;
+}
 /* add style for bootstrap todo app */
 
 

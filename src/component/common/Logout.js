@@ -17,7 +17,7 @@ class Logout extends Component {
         
         return (
             <div>
-                <h3>You are loged out!! <Link to="/login">Login</Link> again.</h3>                
+                <h3>You are loged out!! <Link to="/reduxlogin">Login</Link> again.</h3>                
             </div>
         )
     }

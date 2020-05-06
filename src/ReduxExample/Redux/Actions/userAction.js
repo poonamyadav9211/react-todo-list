@@ -7,7 +7,7 @@ import {
     PASSWORDERROR, 
     EMAILERROR, 
     LASTNAMEERROR, 
-    FIRSTNAMEERROR 
+    FIRSTNAMEERROR
 } from '../Actions/type';
 
 export const firstNameAction = (firstname)  => (
@@ -37,7 +37,6 @@ export const passwordAction = (password)  => (
         payload: password
     }
 );
-
 
 export const firstNameErrorAction = (firstnameerror)  => (
     {
@@ -73,3 +72,6 @@ export const isUserCreatedAction = (isusercreated)  => (
         payload: isusercreated
     }
 );
+
+
+

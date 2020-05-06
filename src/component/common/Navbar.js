@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {Link} from 'react-router-dom'
 import '../style.css'
-import { isTokenExist } from '../BusinessLogic/common';
+import { connect } from 'react-redux';
 
 class Navbar extends Component {    
     render() {
@@ -9,21 +9,22 @@ class Navbar extends Component {
             <nav className="nav">
                 <h2><Link to="/" >Logo</Link></h2>
                     <ul>
-                        {/* <li><Link to="/simpletodo">Simple app</Link></li>
+                        <li><Link to="/simpletodo">Simple app</Link></li>
                         <li><Link to="/bootstrapodo">With bootstrap</Link></li>
-                        <li><Link to="/animationtodo">With Animation</Link></li>*/}
-                        <li><Link to="/reduxregister">Redux-Registration</Link></li>
-                        <li><Link to="/reduxlogin">Redux-Login</Link></li>
-                        {/* {                            
-                        isTokenExist()
+                        <li><Link to="/animationtodo">With Animation</Link></li> 
+                        {     
+                        this.props.islogin
                             ? <li><Link to="/logout">Logout</Link></li>
-                            : <li><Link to="/login">Login</Link></li>
-                        } */}
-                       
+                            : <li><Link to="/reduxlogin">Login</Link></li>
+                        }                       
                     </ul>
             </nav>
            )
     }
 }
 
-export default Navbar;
+const mapStateToProps = state =>({
+    islogin : state.AuthState.isLogin
+});
+
+export default connect(mapStateToProps, null)(Navbar)
