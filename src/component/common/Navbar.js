@@ -9,14 +9,18 @@ class Navbar extends Component {
             <nav className="nav">
                 <h2><Link to="/" >Logo</Link></h2>
                     <ul>
-                        <li><Link to="/simpletodo">Simple app</Link></li>
+                        {/* <li><Link to="/simpletodo">Simple app</Link></li>
                         <li><Link to="/bootstrapodo">With bootstrap</Link></li>
                         <li><Link to="/animationtodo">With Animation</Link></li> 
                         {     
                         this.props.islogin
                             ? <li><Link to="/logout">Logout</Link></li>
                             : <li><Link to="/reduxlogin">Login</Link></li>
-                        }                       
+                        }                        */}
+
+                        <li>
+                            <Link to="/dotnetapp">Dotnet App</Link>
+                        </li>
                     </ul>
             </nav>
            )

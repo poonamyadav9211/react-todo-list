@@ -1,0 +1,11 @@
+export const GETTODO = "GETTODO";
+export const GETALLTODO = "GETALLTODO";
+export const ADDTODO = "ADDTODO";
+export const EDITTODO = "EDITTODO";
+export const DELETETODO = "DELETETODO";
+export const ADDTODOTITLE = "ADDTODOTITLE";
+export const ADDTODOTEXT = "ADDTODOTEXT";
+export const MARKCOMPLETED = "MARKCOMPLETED";
+export const ISBUTTONEDIT = "ISBUTTONEDIT";
+export const CLEARTODO = "CLEARTODO";
+export const RECEIVE_POSTS = "RECEIVE_POSTS";

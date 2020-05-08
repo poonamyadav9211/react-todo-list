@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-
+import { receivedPosts } from '../../DotnetApiExample/Actions/dotnetTodoAction';
+const { createProxyMiddleware } = require('http-proxy-middleware');
 
 class ApiTest extends Component {
     constructor(){
         super();
-
         this.state = {
             apiCall :'',
             user:''
@@ -14,7 +14,16 @@ class ApiTest extends Component {
    getApi = () => {
     let newdata ='';
      newdata= fetch('http://localhost:5000/api/',{
-            method: "GET"
+        method: 'POST',
+        mode: 'no-cors',
+        cache: 'no-cache',
+        credentials: 'same-origin',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json; charset=utf8'
+        },
+        redirect: 'follow',
+        referrer: 'no-referrer',
         })
         .then(res => res.json())
         .then(data=> {
@@ -70,6 +79,21 @@ class ApiTest extends Component {
         });
     }
 
+    postTodoUser = (todo) => {
+        fetch('http://localhost:29495/api/todos/',{
+            method: 'POST',
+            body: JSON.stringify(todo),
+            cache: 'no-cache',
+            headers: {
+                'Content-Type': 'application/json'       
+            }
+        })
+        .then(res => res.json())
+        .then(data=> {
+            return data;
+        });
+    }
+
 
     render() {
         const user ={
@@ -116,6 +140,21 @@ export const getTokenByUser = (email, password) => {
         .then(res => res.json())
         .then(data=> {
             return data;
+        });
+    }
+
+    export const postTodoUser1 = (todo) => {
+        fetch('http://localhost:29495/api/todos/',{
+            method: 'POST',
+            body: JSON.stringify(todo),
+            cache: 'no-cache',
+            headers: {
+                'Content-Type': 'application/json'       
+            }
+        })
+        .then(res => res.json())
+        .then(data=> {
+            return receivedPosts(data);
         });
     }
 

@@ -4,6 +4,7 @@ import { authReducer } from './authReducer';
 import  {usersReducer} from './userReducer'
 import { todoReducer } from './todoReducer';
 import { testOpration } from './testReducer';
+import { dotnetTodoReducer } from '../../../DotnetApiExample/Reducers/dotnetTodoReducr';
 
 
 const rootReducers = combineReducers({
@@ -11,7 +12,8 @@ const rootReducers = combineReducers({
     AuthState: authReducer,
     userState: usersReducer,
     todoState: todoReducer,
-    testState: testOpration
+    testState: testOpration,
+    dotnetState:dotnetTodoReducer
 });
 
 export default rootReducers;
