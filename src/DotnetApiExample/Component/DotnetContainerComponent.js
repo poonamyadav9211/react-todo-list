@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import { 
-    addTodoAction,
-    editTodoAction,
-    deleteTodoAction,
-    markCompletedAction,
-    isButtonEditAction
- } from '../Actions/dotnetTodoAction'
 import DotnetAddTodoComponent from './DotnetAddTodoComponent';
 import DotnetListTodoComponent from './DotnetListTodoComponent';
+import { 
+  saveTodo, 
+  updateTodo, 
+  getTodoById, 
+  getAllTodos 
+} from '../Actions/actionCreator';
+
 
 class DotnetContainerComponent extends Component {
     constructor(){
@@ -38,25 +38,29 @@ class DotnetContainerComponent extends Component {
         
           addTodo = (e) =>{
             e.preventDefault();
-            const { title, createdBy} = this.state; 
-            const {todos} = this.props.todos;       
-              let id;
-                if(todos.length>0){
-                  id=parseInt(todos.slice(-1)[0].id + 1)
-                } else {
-                  id = 1;
-              }
+            const { title, createdBy} = this.state;           
+
+            // const {todos} = this.props.todos;       
+            //   let id;
+            //     if(todos.length>0){
+            //       id=parseInt(todos.slice(-1)[0].id + 1)
+            //     } else {
+            //       id = 1;
+            //   }
     
-              if(!title || !createdBy){
-                return;
-              }
+            //   if(!title || !createdBy){
+            //     return;
+            //   }
               const newTods = {
-                id: this.props.isButtonEdit? this.state.updateId : id,
-                createdBy,
-                title,
-                completed: false
+                CreatedBy:createdBy,
+                Title: title,
+                Date :"",
+                Completed: false
               }
-              this.props.addTodoAction(newTods);
+
+              this.props.saveTodo(newTods, true);
+
+
             //   if(this.props.isButtonEdit){
             //     this.props.editTodoAction(newTods);
             //     this.props.isButtonEditAction(false);
@@ -95,16 +99,17 @@ class DotnetContainerComponent extends Component {
                 [name]:value
             })
           }
+    componentDidMount(){
+      this.props.getAllTodos();
+    }
     
-    render() {
-        console.log('this props: ', this.props.todos)
-        console.log('======== post ===========',this.props.getPosts)    
+    render() { 
         const {title, createdBy} = this.state;
+        const {todos} = this.props.allTodos.todos
         // if(isTokenExist()){
           return (
             <div>
-                DotnetContainerComponent
-                 <DotnetAddTodoComponent 
+                    <DotnetAddTodoComponent 
                     addTodo={this.addTodo} 
                     editTodo={this.props.editTodo} 
                     handleChange={this.handleChange}
@@ -112,12 +117,12 @@ class DotnetContainerComponent extends Component {
                     title={title}
                     inputRef={this.inputRef}
                 />
-                {/*<DotnetListTodoComponent 
-                    todos={this.state.todos} 
+                <DotnetListTodoComponent 
+                    todos={this.props.allTodos.todos} 
                     markComplet={this.markComplet}
                     delTodo={this.delTodo}
                     editTodo={this.editTodo}
-                /> */}
+                />
             </div>
         )
         //   }
@@ -128,28 +133,49 @@ class DotnetContainerComponent extends Component {
       }
 }
 
-const mapStateToProps = state =>({
-    todos: state.dotnetState
-});
+// const mapStateToProps = state =>({
+//     todos: state.dotnetState
+// });
   
+// const mapDispatchToProps = (dispatch) => {
+//     return {      
+//       saveTodoAction: todo => {
+//         dispatch(saveTodoAction(todo))
+//       },
+//       deleteTodoAction: todo => {
+//         dispatch(deleteTodoAction(todo))
+//       },
+//       markCompletedAction: todo => {
+//         dispatch(markCompletedAction(todo))
+//       },
+//       editTodoAction: (todo) => {
+//         dispatch(editTodoAction(todo))
+//       },
+//       isButtonEditAction: (isButtonEdit) => {
+//         dispatch(isButtonEditAction(isButtonEdit))
+//       }
+//     }
+// };
+
+const mapStateToProps = state =>({
+  allTodos: state.dotnetState.getAllTodo
+});
+
 const mapDispatchToProps = (dispatch) => {
-    return {      
-      addTodoAction: todo => {
-        dispatch(addTodoAction(todo))
-      },
-      deleteTodoAction: todo => {
-        dispatch(deleteTodoAction(todo))
-      },
-      markCompletedAction: todo => {
-        dispatch(markCompletedAction(todo))
-      },
-      editTodoAction: (todo) => {
-        dispatch(editTodoAction(todo))
-      },
-      isButtonEditAction: (isButtonEdit) => {
-        dispatch(isButtonEditAction(isButtonEdit))
-      }
+  return {     
+      saveTodo: (todo,isPost) => {
+      dispatch(saveTodo(todo,isPost))
+    }, 
+    updateTodo: (id,todo,isPost) => {
+      dispatch(updateTodo(id,todo,isPost))
+    },   
+      getTodoById: id => {
+      dispatch(getTodoById(id))
+    },
+    getAllTodos: () => {
+      dispatch(getAllTodos())
     }
+  }
 };
   
   export default connect(mapStateToProps, mapDispatchToProps)(DotnetContainerComponent)

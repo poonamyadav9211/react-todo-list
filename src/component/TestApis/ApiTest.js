@@ -154,7 +154,7 @@ export const getTokenByUser = (email, password) => {
         })
         .then(res => res.json())
         .then(data=> {
-            return receivedPosts(data);
+            //return receivedPosts(data);
         });
     }
 

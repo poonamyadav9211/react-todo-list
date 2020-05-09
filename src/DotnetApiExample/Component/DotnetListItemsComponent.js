@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-export default class DotnetListItems extends Component {
+export default class DotnetListItemsComponent extends Component {
     render() {
         const {id, title, name } = this.props.todo;
         return (
