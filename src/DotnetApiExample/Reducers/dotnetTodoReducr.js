@@ -5,7 +5,8 @@ import {
     SAVE_TODO,
     GET_TODO,
     GET_ALL_TODO,
-    EDIT_TODO
+    EDIT_TODO,
+    DELETE_TODO
 } from '../Actions/type';
 
 import { combineReducers } from 'redux';
@@ -17,9 +18,35 @@ const initialState = {
     text: ''
 }
 
-const dotnetTodosOps = (state= initialState, action) => {
+const todosOps = (state= initialState, action) => {    
     switch(action.type){
-       
+        case GET_ALL_TODO:
+            return {
+                todos: action.payload
+            }
+        case SAVE_TODO:
+            return {
+                todos: [...state.todos, action.payload]
+              } 
+        case GET_TODO:
+            return {
+                todo: action.payload
+              }
+        case EDIT_TODO:
+            return{
+                todos: state.todos.map(todo => 
+                    {
+                        if(todo.Id === action.payload.Id)
+                        {
+                            todo.CreatedBy = action.payload.CreatedBy;
+                            todo.Title = action.payload.Title;
+                        } 
+                        return todo
+                    })
+            }
+        case DELETE_TODO:
+            return {todos:state.todos.filter((todo) => todo.Id !== action.id)};
+          
         case MARKCOMPLETED:
             return{
                 todos: state.todos.map(todo => {if(todo.id === action.payload){
@@ -44,39 +71,6 @@ const isButtonEdit = (state= false, action) => {
     }
 }
 
-function saveTodo(state = initialState,action) {
-    if(action.type===SAVE_TODO)       
-        return {
-          ...state,
-          todo: action.payload
-        } 
-    else{
-        return state
-    }      
-}
-
-function getTodo(state = initialState ,action) {
-    if(action.type===GET_TODO)         
-        return {
-          ...state,
-          item: action.payload
-        }   
-    else{
-        return state
-    }
-}
-
-function getAllTodo(state = initialState,action) {
-    if(action.type===GET_ALL_TODO)         
-        return {
-          ...state,
-          todos: action.payload
-        }
-        else{
-            return state
-        }    
-}
-
 function editTodo(state = initialState,action) {
     if(action.type===EDIT_TODO)         
         return {
@@ -89,12 +83,8 @@ function editTodo(state = initialState,action) {
 }
 
 
-
 export const dotnetTodoReducer = combineReducers({
-    dotnetTodosOps,
+    todosOps,
     isButtonEdit,
-    saveTodo,
-    getTodo,
-    editTodo,
-    getAllTodo
+    editTodo
 });

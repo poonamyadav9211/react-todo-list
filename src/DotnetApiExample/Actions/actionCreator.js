@@ -2,8 +2,11 @@ import {
     getAllTodosApi, 
     saveTodoApi, 
     editTodoApi, 
-    getTodoApi 
+    getTodoApi, 
+    deleteTodoApi,
+    markCompletedApi
 } from "../DotnetApi/server.apis"
+import { editTodoAction } from "./dotnetTodoAction"
 
 
 export function getAllTodos() {
@@ -40,5 +43,23 @@ export function updateTodo(id,todo,isPost) {
 export function getTodoById(id) {
   return (dispatch) => {
       return dispatch(getTodoApi(id))
+  }
+}
+
+export function deleteTodo(id) {
+  return (dispatch) => {
+      return dispatch(deleteTodoApi(id))
+  }
+}
+
+export function markCompleted(id) {
+  return (dispatch) => {
+      return dispatch(markCompletedApi(id))
+  }
+}
+
+export function editTodo(id,selectedTodo) {
+  return (dispatch) => {
+      return dispatch(editTodoApi(id,selectedTodo))
   }
 }

@@ -6,174 +6,160 @@ import {
   saveTodo, 
   updateTodo, 
   getTodoById, 
-  getAllTodos 
+  getAllTodos, 
+  deleteTodo,
+  markCompleted,
+  editTodo
 } from '../Actions/actionCreator';
-
+import { isButtonEditAction } from '../Actions/dotnetTodoAction';
 
 class DotnetContainerComponent extends Component {
-    constructor(){
-        super();
-    
-        this.state = {
-          updateId:0,
-          title:'',
-          createdBy:''
-        }
-    
-        this.inputRef = React.createRef();
-      }
-       
-    
-          markComplet = (id) => { 
-            this.props.markCompletedAction(id);    
-          }
-        
-          delTodo = (id) =>{
-            this.props.deleteTodoAction(id);
-    
-            if(this.state.inputRef){
-              this.state.inputRef.current.focus();
-            }    
-          }
-        
-          addTodo = (e) =>{
-            e.preventDefault();
-            const { title, createdBy} = this.state;           
-
-            // const {todos} = this.props.todos;       
-            //   let id;
-            //     if(todos.length>0){
-            //       id=parseInt(todos.slice(-1)[0].id + 1)
-            //     } else {
-            //       id = 1;
-            //   }
-    
-            //   if(!title || !createdBy){
-            //     return;
-            //   }
-              const newTods = {
-                CreatedBy:createdBy,
-                Title: title,
-                Date :"",
-                Completed: false
-              }
-
-              this.props.saveTodo(newTods, true);
-
-
-            //   if(this.props.isButtonEdit){
-            //     this.props.editTodoAction(newTods);
-            //     this.props.isButtonEditAction(false);
-            //   } else{
-            //     this.props.addTodoAction(newTods); 
-            //   }
-              
-            this.setState({
-                title:'',
-                createdBy:''
-            })
-            this.inputRef.current.focus();
-          }
-        
-          editTodo = (id) => {
-            const selectedTodo = this.props.todosOpration.todos.find((todo) => {
-              return todo.id === id
-            });
-    
-            Object.assign(this.props.todoItem, 
-              {
-                createdBy: selectedTodo.name, 
-                title: selectedTodo.title
-              });
-    
-            this.props.isButtonEditAction(true);  
-            this.setState({
-              isEdit:true,
-              updateId: selectedTodo.id
-            })
-          }
-    
-          handleChange= (e) => {
-            const {name, value} = e.target; 
-            this.setState({
-                [name]:value
-            })
-          }
-    componentDidMount(){
-      this.props.getAllTodos();
+  constructor(){
+    super();    
+    this.state = {
+      updateId:0,
+      title:'',
+      createdBy:'',
+      updateTodo: []
     }
+    this.inputRef = React.createRef();
+  }
+ 
+  markComplet = (id) => { 
+    this.props.markCompleted(id);    
+  }
+        
+  delTodo = (id) =>{
+    this.props.deleteTodo(id);
+    this.inputRef.current.focus();    
+  }
+        
+  addTodo = (e) =>{
+    e.preventDefault();
+    const { title, createdBy} = this.state; 
+      if(!title || !createdBy){
+        return;
+      }
+
+    const newTods = {
+      Id:this.state.id,
+      CreatedBy:createdBy,
+      Title: title,
+      Date :"",
+      Completed: false
+    }
+
+    if(this.props.isEdit){
+      this.props.editTodo(this.state.id,newTods);
+      this.props.isButtonEditAction(false);
+    } else{
+      this.props.saveTodo(newTods, true);
+    }
+              
+    this.setState({
+      title:'',
+      createdBy:'',
+      editTodo:false
+    });
+    this.inputRef.current.focus();
+  }
+        
+  editTodo = (id) => {
+    const selectedTodo = this.props.allTodos.find((todo) => {
+      return todo.Id === id
+    });
+
+    this.setState({
+      id:selectedTodo.Id,
+      createdBy: selectedTodo.CreatedBy,
+      title: selectedTodo.Title,
+      editTodo:true
+    });                
+    this.props.isButtonEditAction(true);
+  }
     
-    render() { 
-        const {title, createdBy} = this.state;
-        const {todos} = this.props.allTodos.todos
-        // if(isTokenExist()){
-          return (
-            <div>
-                    <DotnetAddTodoComponent 
-                    addTodo={this.addTodo} 
-                    editTodo={this.props.editTodo} 
-                    handleChange={this.handleChange}
-                    createdBy={createdBy}
-                    title={title}
-                    inputRef={this.inputRef}
-                />
-                <DotnetListTodoComponent 
-                    todos={this.props.allTodos.todos} 
-                    markComplet={this.markComplet}
-                    delTodo={this.delTodo}
-                    editTodo={this.editTodo}
-                />
-            </div>
-        )
+  handleChange= (e) => {
+    const {name, value} = e.target; 
+      this.setState({
+        [name]:value
+      });
+  }
+
+  componentDidMount(){
+    fetch('http://localhost:29495/api/todos')
+      .then((response) => response.json())
+      .then(booksList => {
+        this.setState({ updateTodo: booksList });
+      });
+    this.props.getAllTodos();
+  }
+
+  getAllData = () =>{  
+    if(!this.state.editTodo){     
+      return this.state.updateTodo = this.props.allTodos
+    } 
+    return this.state.updateTodo;
+  }
+    
+  render() { 
+    const {title, createdBy} = this.state;
+    this.getAllData()
+    // if(isTokenExist()){
+      return (
+        <div>
+          <DotnetAddTodoComponent 
+            addTodo={this.addTodo} 
+            handleChange={this.handleChange}
+            createdBy={createdBy}
+            title={title}
+            inputRef={this.inputRef}
+          />
+            <DotnetListTodoComponent 
+              todos={this.state.updateTodo} 
+              markComplet={this.markComplet}
+              delTodo={this.delTodo}
+              editTodo={this.editTodo}
+            />
+        </div>
+      )
         //   }
         //   else{
         //       return <Redirect to="/login" />
         //   }
          
-      }
+  }
 }
 
-// const mapStateToProps = state =>({
-//     todos: state.dotnetState
-// });
-  
-// const mapDispatchToProps = (dispatch) => {
-//     return {      
-//       saveTodoAction: todo => {
-//         dispatch(saveTodoAction(todo))
-//       },
-//       deleteTodoAction: todo => {
-//         dispatch(deleteTodoAction(todo))
-//       },
-//       markCompletedAction: todo => {
-//         dispatch(markCompletedAction(todo))
-//       },
-//       editTodoAction: (todo) => {
-//         dispatch(editTodoAction(todo))
-//       },
-//       isButtonEditAction: (isButtonEdit) => {
-//         dispatch(isButtonEditAction(isButtonEdit))
-//       }
-//     }
-// };
-
 const mapStateToProps = state =>({
-  allTodos: state.dotnetState.getAllTodo
+  allTodos: state.dotnetState.todosOps.todos,
+  isEdit: state.dotnetState.isButtonEdit
 });
 
 const mapDispatchToProps = (dispatch) => {
   return {     
-      saveTodo: (todo,isPost) => {
+    saveTodo: (todo,isPost) => {
       dispatch(saveTodo(todo,isPost))
     }, 
     updateTodo: (id,todo,isPost) => {
       dispatch(updateTodo(id,todo,isPost))
     },   
-      getTodoById: id => {
+    getTodoById: id => {
       dispatch(getTodoById(id))
+    },
+    deleteTodo: id => {
+      dispatch(deleteTodo(id))
     },
     getAllTodos: () => {
       dispatch(getAllTodos())
+    },
+    markCompleted: id => {
+      dispatch(markCompleted(id))
+    },
+    editTodo: (id,selectedTodo) => {
+      dispatch(editTodo(id,selectedTodo))
+    },
+    isButtonEditAction: (isEdit) => {
+      dispatch(isButtonEditAction(isEdit))
     }
   }
 };

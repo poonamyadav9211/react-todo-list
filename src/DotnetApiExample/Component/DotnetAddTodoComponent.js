@@ -68,6 +68,7 @@ class DotnetAddTodoComponent extends Component {
                       <input 
                       type="text" 
                       autoFocus
+                      ref={inputRef}
                       name="title" 
                       value={title}
                       onChange={handleChange} 
@@ -75,8 +76,7 @@ class DotnetAddTodoComponent extends Component {
                     </div><br />
                     <div>
                       <label>Create By</label>
-                      <input type="text"                      
-                      ref={inputRef}
+                      <input type="text"
                       name="createdBy" 
                       value={createdBy}
                       onChange={handleChange} 
@@ -105,7 +105,8 @@ class DotnetAddTodoComponent extends Component {
 }
 
 const mapStateToProps = state =>({
-    todos: state.dotnetState.todoPosts
+    todos: state.dotnetState.todoPosts,
+    isButtonEdit: state.dotnetState.isButtonEdit
 });
 
 const mapDispatchToProps = (dispatch) => {

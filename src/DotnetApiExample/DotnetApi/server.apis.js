@@ -1,8 +1,11 @@
 import fetch from 'cross-fetch'
 import { 
-    getAllPosts, 
-    saveTodoAction, 
-    getTodoAction 
+    getAllPosts,
+    saveTodoAction,
+    getTodoAction, 
+    deleteTodoAction,
+    markCompletedAction,
+    editTodoAction
 } from "../Actions/dotnetTodoAction";
 
 
@@ -16,10 +19,9 @@ export const getAllTodosApi = ()  => {
             }
         });
         const data = await res.json();
-        return dispatch(getAllPosts(data));
+        dispatch(getAllPosts(data));
     }
   }
-
     
 export const saveTodoApi = (todo)  => {  
     return async dispatch => {
@@ -31,12 +33,11 @@ export const saveTodoApi = (todo)  => {
                 'Content-Type': 'application/json'
             }
         });
-        const data = await res.json();        
-        return dispatch(saveTodoAction(data));
+        const data = await res.json();    
+        dispatch(saveTodoAction(data));
+        dispatch(getAllTodosApi())
     }
 }
-
-
 
 export const editTodoApi = (id,todo)  => {  
     return async dispatch => {
@@ -49,8 +50,7 @@ export const editTodoApi = (id,todo)  => {
             }
         })
         const data = await res.json();
-        dispatch(saveTodoAction(data))
-        dispatch(getAllTodosApi());
+        dispatch(editTodoAction(data));
     }
 }
 
@@ -65,5 +65,35 @@ export const getTodoApi = (id)  => {
         });
         const data = await res.json();
         return dispatch(getTodoAction(data));
+    }
+}
+
+export const deleteTodoApi = (id)  => { 
+    return async dispatch => {
+        const res = await fetch(`http://localhost:29495/api/todos/${id}`, {
+            method: 'DELETE',
+            cache: 'no-cache',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        const data = await res.json();
+        dispatch(deleteTodoAction(data));
+        dispatch(getAllTodosApi())
+    }
+}
+
+export const markCompletedApi = (id)  => { 
+    return async dispatch => {
+        const res = await fetch(`http://localhost:29495/api/todos/markCompleted/${id}`, {
+            method: 'GET',
+            cache: 'no-cache',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        const data = await res.json();
+        dispatch(markCompletedAction(data));
+        dispatch(getAllTodosApi())
     }
 }

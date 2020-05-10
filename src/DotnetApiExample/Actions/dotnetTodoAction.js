@@ -56,7 +56,7 @@ export const getAllPosts = (data) => {
 export const deleteTodoAction = (id)  => (
     {
         type: DELETE_TODO,
-        payload: id
+        payload:id
     }
 );
 
