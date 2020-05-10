@@ -7,7 +7,7 @@ const initialState = {
 }
 
 const isLogin = (state= initialState, action) => {
-    if(action.type == ISLOGIN){
+    if(action.type === ISLOGIN){
             return action.payload
     } else{
         return state
@@ -15,7 +15,7 @@ const isLogin = (state= initialState, action) => {
 }
 
 const authToken = (state= initialState.token, action) => { 
-    if(action.type == AUTHTOKEN){
+    if(action.type === AUTHTOKEN){
             return action.payload
     } else{
         return state

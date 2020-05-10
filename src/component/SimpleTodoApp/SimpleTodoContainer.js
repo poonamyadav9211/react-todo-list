@@ -99,7 +99,10 @@ class SimpleTodoContainer extends Component {
             break;
           case "name":
             this.props.addTodoTextAction(value)
+            break;
           default:
+            this.props.addTodoTextAction('');
+            this.props.addTodoTitleAction('');
             break;
         }
 

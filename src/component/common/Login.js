@@ -24,7 +24,7 @@ class Login extends Component {
 
         if(formValid(this.state)){
             const login= getTokenByUser(email,password);
-            const token = login.then(res => {
+            login.then(res => {
                 this.setState({
                     isLogin:true
                 })

@@ -94,7 +94,7 @@ const addTodoItems = (state= initialState, action) => {
 }
 
 const isButtonEdit = (state= false, action) => {  
-    if(action.type==ISBUTTONEDIT){
+    if(action.type === ISBUTTONEDIT){
         return action.payload
     }  else {
         return state

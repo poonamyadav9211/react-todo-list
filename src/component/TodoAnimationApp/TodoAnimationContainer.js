@@ -89,9 +89,9 @@ class TodoAnimationContainer extends Component {
                         </form>
                     </header>  
                     <ListItem 
-                    items={this.state.items} 
-                    deletItem={this.deletItem} 
-                    setUpdate={this.setUpdate}
+                        items={this.state.items} 
+                        deletItem={this.deletItem} 
+                        setUpdate={this.setUpdate}
                     />
                 </div>
             )

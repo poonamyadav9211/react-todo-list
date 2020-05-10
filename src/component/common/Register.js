@@ -1,7 +1,14 @@
 import React, { Component } from 'react';
 import './common-style.css';
-import {formValid, emailRegx, isTokenExist} from '../BusinessLogic/common'
-import { Link, Redirect } from 'react-router-dom';
+import {
+    formValid, 
+    emailRegx, 
+    //isTokenExist
+} from '../BusinessLogic/common'
+import { 
+    Link, 
+    //Redirect 
+} from 'react-router-dom';
 import {newPostUser} from '../TestApis/ApiTest';
 
 class Register extends Component {

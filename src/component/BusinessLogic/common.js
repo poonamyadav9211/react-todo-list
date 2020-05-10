@@ -1,5 +1,5 @@
-import store from '../../ReduxExample/Redux/store';
-const state = store.getState();
+// import store from '../../ReduxExample/Redux/store';
+// const state = store.getState();
 export const emailRegx = RegExp(/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/);
 export const formValid = ({formErrors, ...rest}) => {
     let valid = true;
@@ -31,7 +31,7 @@ export const validateUser = (username, password) => {
 
 export const isTokenExist = () => {   
     const token = localStorage.getItem('token');
-    if(token == undefined || token == null ){
+    if(token === undefined || token === null ){
         return false
     }
     else

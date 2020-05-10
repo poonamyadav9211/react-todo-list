@@ -69,7 +69,7 @@ class TodoAppContainer extends Component {
 
     handleEdit = id => {
         const todo = this.props.todos.find(item => item.id === id);
-        this.state.todos = this.props.todos.filter(item => item.id!=id);
+        this.state.todos = this.props.todos.filter(item => item.id!==id);
 
         this.setState({
             item:todo.title,

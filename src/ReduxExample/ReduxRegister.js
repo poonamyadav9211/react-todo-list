@@ -17,9 +17,9 @@ import {
 import { connect } from 'react-redux';
 
 class ReduxRegister extends Component {
-    constructor(props){
-        super(props);
-    }
+    // constructor(props){
+    //     super(props);
+    // }
 
     handleSubmit = e => {
         e.preventDefault();

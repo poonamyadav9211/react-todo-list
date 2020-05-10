@@ -22,28 +22,23 @@ const users = (state= initialState, action) => {
                 ...state,
                firstname: action.payload
             }
-            break;
         case LASTNAME:
             return {
                 ...state,
                lastname: action.payload
-            }            
-            break;
+            }
         case EMAIL:
             return {
                 ...state,
                email: action.payload
             }
-            break;
         case PASSWORD:
             return {
                 ...state,
                password: action.payload
             }
-            break;
         default:
             return state
-            break;
     }
 }
 
@@ -54,34 +49,29 @@ const usersError = (state= initialState.formErrors, action) => {
                 ...state,
                firstname: action.payload
             }
-            break;
         case LASTNAMEERROR:
             return {
                 ...state,
                lastname: action.payload
-            }            
-            break;
+            }
         case EMAILERROR:
             return {
                 ...state,
                email: action.payload
             }
-            break;
         case PASSWORDERROR:
             return {
                 ...state,
                password: action.payload
             }
-            break;
         default:
             return state
-            break;
     }
 }
 
 const isUserCreated = (state= initialState.isusercreated, action) => {   
     
-    if(action.type == ISUSERCREATED){
+    if(action.type === ISUSERCREATED){
             return action.payload
     } else{
         return state

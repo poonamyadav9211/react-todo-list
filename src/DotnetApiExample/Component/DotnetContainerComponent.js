@@ -70,6 +70,7 @@ class DotnetContainerComponent extends Component {
     });
 
     this.setState({
+      updateTodo: this.props.allTodos.filter(todo => todo.Id!==id),
       id:selectedTodo.Id,
       createdBy: selectedTodo.CreatedBy,
       title: selectedTodo.Title,

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { receivedPosts } from '../../DotnetApiExample/Actions/dotnetTodoAction';
-const { createProxyMiddleware } = require('http-proxy-middleware');
+// import { receivedPosts } from '../../DotnetApiExample/Actions/dotnetTodoAction';
+// const { createProxyMiddleware } = require('http-proxy-middleware');
 
 class ApiTest extends Component {
     constructor(){

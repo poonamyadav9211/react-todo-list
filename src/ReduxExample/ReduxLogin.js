@@ -17,16 +17,16 @@ import {
 } from './Redux/Actions/userAction';
 
 class ReduxLogin extends Component {
-    constructor(props){
-        super(props);        
-    }
+    // constructor(props){
+    //     super(props);        
+    // }
 
     handleSubmit = e => {
         e.preventDefault();
         const {email,password} =  this.props.user.users;
         if(formValid({formErrors:this.props.userError})){
             const login= getTokenByUser(email,password);
-            const token = login.then(res => {
+            login.then(res => {
                 this.props.isloginAction(true);
                 localStorage.setItem('token', res.token);
                 this.props.tokenAction(res.token);

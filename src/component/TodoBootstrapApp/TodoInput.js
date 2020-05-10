@@ -1,14 +1,12 @@
-import React, { Component, createRef } from 'react'
+import React, { Component } from 'react'
 
 class TodoInput extends Component {  
-    constructor(props){
-        super(props);
-        
-    }
-    render() {
-        
-        const { item, inputRef ,handleChange, handleSubmit, editItem } = this.props;  
-             
+    // constructor(props){
+    //     super(props);        
+    // }
+
+    render() {        
+        const { item, inputRef ,handleChange, handleSubmit, editItem } = this.props;             
         return (
             <div className="card card-body my-3"> 
                 <form onSubmit={handleSubmit}>
