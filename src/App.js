@@ -13,6 +13,8 @@ import Test from './ReduxExample/Component/Test';
 import ReduxRegister from './ReduxExample/ReduxRegister';
 import ReduxLogin from './ReduxExample/ReduxLogin';
 import DotnetContainerComponent from './DotnetApiExample/Component/DotnetContainerComponent';
+import DotnetRegistration from './DotnetApiExample/DotnetRegistration';
+import DotnetLogin from './DotnetApiExample/DotnetLogin';
 
 class App extends Component {
   render() {
@@ -32,6 +34,8 @@ class App extends Component {
             <Route path="/reduxregister" component={ReduxRegister} />
             <Route path="/reduxlogin" component={ReduxLogin} />
             <Route path="/dotnetapp" component={DotnetContainerComponent} />
+            <Route path="/dotnetlogin" component={DotnetLogin} />
+            <Route path="/dotnetregister" component={DotnetRegistration} />
           </Switch>
       </Router>
     )

@@ -4,17 +4,19 @@ import {
     editTodoApi, 
     getTodoApi, 
     deleteTodoApi,
-    markCompletedApi
-} from "../DotnetApi/server.apis"
-import { editTodoAction } from "./dotnetTodoAction"
+    markCompletedApi,
+    addAuthUserApi,
+    getAuthUserByIdApi,
+    getAuthUserApi,
+    getTokenApi
+} from "../DotnetApi/server.apis";
 
-
+// todo apis
 export function getAllTodos() {
     return (dispatch) => {
       return dispatch(getAllTodosApi())
   }
 }
-
 
 function shouldFetchPosts(state, isPost) {
   if (isPost) {
@@ -61,5 +63,34 @@ export function markCompleted(id) {
 export function editTodo(id,selectedTodo) {
   return (dispatch) => {
       return dispatch(editTodoApi(id,selectedTodo))
+  }
+}
+
+//---------------------------------------------------------
+
+// user apis
+export function addAuthUser(user) {
+  return (dispatch) => {
+      return dispatch(addAuthUserApi(user))
+  }
+}
+
+export function getAuthUserById(id) {
+  return (dispatch) => {
+      return dispatch(getAuthUserByIdApi(id))
+  }
+}
+
+export function getAuthUser(user) {
+  console.log('=======getAuthUser=========',user)
+  return (dispatch) => {
+      return dispatch(getAuthUserApi(user))
+  }
+}
+
+export function getToken(username,password) {  
+  return (dispatch) => {
+    console.log('=======getAuthUser=========',username,password)  
+      return dispatch(getTokenApi(username,password))
   }
 }

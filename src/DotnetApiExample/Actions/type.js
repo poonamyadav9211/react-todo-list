@@ -9,3 +9,7 @@ export const GET_ALL_TODO = "GET_ALL_TODO";
 export const SAVE_TODO = "SAVE_TODO";
 export const DELETE_TODO = "DELETE_TODO";
 export const EDIT_TODO = "EDIT_TODO";
+export const ADD_AUTHUSER = "ADD_AUTHUSER";
+export const GET_AUTHUSER_BY_ID = "GET_AUTHUSER_BY_ID";
+export const GET_AUTHUSER = "GET_AUTHUSER";
+export const GET_TOKEN = "GET_TOKEN";

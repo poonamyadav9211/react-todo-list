@@ -18,9 +18,9 @@ class Navbar extends Component {
                             : <li><Link to="/reduxlogin">Login</Link></li>
                         }                        */}
 
-                        <li>
-                            <Link to="/dotnetapp">Dotnet App</Link>
-                        </li>
+                        <li><Link to="/dotnetapp">Dotnet TodoApp</Link></li>
+                        <li><Link to="/dotnetregister">Registration</Link></li>
+                        <li><Link to="/dotnetlogin">Login</Link></li> 
                     </ul>
             </nav>
            )
