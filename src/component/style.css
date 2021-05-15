@@ -1,14 +1,14 @@
-.nav{
+.nav {
   height: 70px;
   display: flex;
   justify-content: space-around;
   align-items: center;
   min-height: 4vh;
-  background-color: rgb(73,97, 82);
+  background-color: rgb(73, 97, 82);
   color: #fff;
 }
 
-.nav ul{
+.nav ul {
   width: 50%;
   display: flex;
   justify-content: space-around;
