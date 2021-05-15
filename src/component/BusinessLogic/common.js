@@ -16,8 +16,8 @@ export const formValid = ({formErrors, ...rest}) => {
     return valid;
 }
 
-const lusername="poonam.yadav9211@gmail.com";
-const lpassword="poy@10";
+const lusername="test@gmail.com";
+const lpassword="test@123";
 
 export const validateUser = (username, password) => {
     if(username===lusername && password===lpassword){
@@ -31,7 +31,7 @@ export const validateUser = (username, password) => {
 
 export const isTokenExist = () => {    
     const token = localStorage.getItem('token');
-    if(token == undefined || token == null ){
+    if(token === undefined || token == null ){
         return false
     }
     else
