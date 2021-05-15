@@ -10,7 +10,12 @@ app.use(cors());
 app.use(bodyParser.json({ type: '*/*' }));
 app.use(bodyParser.urlencoded({ extended: true }));
 
-const users = [];
+const users = [
+    {
+        email:'test@gmail.com',
+        password:'test@123'
+    }
+];
 
 app.get('/api', (req, res) => {
     res.json({
@@ -55,6 +60,7 @@ app.post('/api/login', (req, res) => {
         email: req.body.user.email,
         password: req.body.user.password
     };
+
     const isUser = validateUser(req.body.user);
     if(isUser === undefined){
         return res.status(404);
@@ -70,7 +76,6 @@ app.post('/api/login', (req, res) => {
 });
 
 function validateUser(user) {
-    // console.log('users: ',users)
     return users.find(u => u.email===user.email && u.password === user.password);
 }
 
