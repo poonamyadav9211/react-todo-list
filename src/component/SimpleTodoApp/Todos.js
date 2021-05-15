@@ -9,7 +9,8 @@ class Todos extends Component {
             <TodoItem key={todo.id} todo={todo} 
                 markComplet={this.props.markComplet} 
                 delTodo={this.props.delTodo} 
-                editTodo={this.props.editTodo} /> 
+                editTodo={this.props.editTodo} 
+                selectTodo={this.props.selectTodo} /> 
         )
     }
 }

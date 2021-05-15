@@ -9,15 +9,18 @@ class AddTodo extends Component {
     }
     
     addTodoItem = (e) =>{
+        
         e.preventDefault();
         const todo = {
             name : this.state.name,
             title : this.state.title,
-            inputRef: this.inputRef
+            completed: this.state.completed,
+            inputRef: this.inputRef,
+            isEditTodo:false
         }    
         
         this.props.addTodo(todo)
-
+       
         // if(this.state.name && this.state.title){
         //     this.props.addTodo(todo)
         // }
@@ -30,13 +33,17 @@ class AddTodo extends Component {
         this.inputRef.current.focus();
 
    }
+
+
  
     render() {
-        const {name,title, handleChange, addTodo,inputRef} = this.props;
+        
+        const {name, title,completed, handleChange, addTodo, editTodo, inputRef, isEditTodo, cancelTodoItem, markComplet} = this.props;
+      
         return (
             <div className="main-container-div">
-                <h3 className="header-style">Add Todo</h3>
-                <form id="simple-todo-form" onSubmit={addTodo} >
+                <h3 className={isEditTodo?"edit-header-style":"header-style"}>{isEditTodo? "Edit Todo": "Add Todo"}</h3>
+                <form id="simple-todo-form" onSubmit={isEditTodo? editTodo : addTodo} >
                     <div>
                       <label>Name</label>
                       <input type="text" 
@@ -54,14 +61,30 @@ class AddTodo extends Component {
                       name="title" 
                       value={title}
                       onChange={handleChange} 
-                     />
+                     />                     
                     </div><br />
+                    {isEditTodo && <><div>
+                      <label>Task</label>
+                      <input type="checkbox" 
+                            onChange={markComplet}
+                            checked={completed? true : false} />                 
+                    </div><br /></>}
                       <input 
                        id="butSubmit"
                         type="submit" 
-                        value="Submit" 
+                        value={isEditTodo?"Update": "Submit" }
                         name="submit"
-                        className="" />                    
+                        className={isEditTodo?"butEdit": "butSubmit"} />    
+                        {isEditTodo && <><input 
+                        id="butCancel"
+                        type="button" 
+                        value="Cancel"
+                        name="cancel"
+                        onClick={cancelTodoItem}
+                        className="" /> 
+                        
+                        </>
+                        }            
                 </form>
             </div>
         )
