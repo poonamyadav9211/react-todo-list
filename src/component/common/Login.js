@@ -22,14 +22,15 @@ class Login extends Component {
     handleSubmit = e => {
         e.preventDefault();
         const {email,password} = this.state;
-
+        
         if(formValid(this.state)){
             const login= getTokenByUser(email,password);
             const token = login.then(res => {
                 this.setState({
                     isLogin:true
                 })
-                localStorage.setItem('token', res.token);
+               
+                localStorage.setItem('token', token);
                 window.location.reload(false);
             });
                 
